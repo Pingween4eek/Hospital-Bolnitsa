@@ -103,4 +103,44 @@ namespace patient_db {
             return;
         }
     }
+
+    void search_patient(std::vector<Patient> arr) {
+        if (arr.empty()) {
+            std::cout << "First create list of patients with command 'create'" << std::endl;
+            return;
+        }
+
+        std::string patient;
+        std::cout << "What patient you looking for? (Enter surname): ";
+        std::cin >> patient;
+
+        patient = to_lower(patient);
+        bool flag = false;
+        int id = -1;
+        int n = arr.size();
+
+        for (int i = 0; i < n; i++) {
+            if (patient == to_lower(arr[i].getSurname())) {
+                id = i;
+                flag = true;
+            }
+        }
+        if (flag) std::cout << arr[id];
+        else {
+            std::cout << "There are no matches" << std::endl;
+            return;
+        }
+    }
+
+    void print_patients(std::vector<Patient> arr) {
+        if (arr.empty()) {
+            std::cout << "List of patients doesnt exist" << std::endl;
+            return;
+        }
+
+        int n = arr.size();
+        for (int i = 0; i < n; i++) {
+            std::cout << arr[i] << std::endl;
+        }
+    }
 }
