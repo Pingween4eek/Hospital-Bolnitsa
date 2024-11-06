@@ -1,0 +1,3 @@
+﻿  client.cpp
+C:\Users\kolga\Desktop\учебка\ЛАБА ТЕХНОЛОГИИ ПРОГАММИРОВАНИЯ\крутой сервис\client\client\client.cpp(105,39): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+  client.vcxproj -> C:\Users\kolga\Desktop\учебка\ЛАБА ТЕХНОЛОГИИ ПРОГАММИРОВАНИЯ\крутой сервис\client\x64\Debug\client.exe
