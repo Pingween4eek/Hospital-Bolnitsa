@@ -22,15 +22,13 @@ void Patient::setAge(int age) { _age = age; }
 void Patient::setDia(std::string diagnosis) { _diagnosis = diagnosis; }
 void Patient::setStatus(std::string status) { _status = status; }
 void Patient::setDoctor(std::string doctor) { _doctor = doctor; }
-void Patient::setDepartment(std::string depatment) { _depatment = department; }
+void Patient::setDepartment(std::string department) { _department = department; }
 void Patient::setDays(int days) { _days = days; }
 
 void Patient::advance_day() {
     if (!(_status == "discharged")) {
-        //srand(time(NULL));
         _days--;
         if (_days <= 0) {
-            //srand(time(NULL));
             int a = rand() % 10;
             if (a < 9)
                 _status = "discharged";

@@ -3,52 +3,91 @@
 #include <list>
 #include <iostream>
 #include <vector>
+#include "send_message.h"
+#include "receive_message.h"
+#include "socket_wrapper.h"
+#include <algorithm> 
 
 using namespace std;
 
-istream& operator >>(istream& in, Patient& pat) {
-	cout << "Enter id:";
-	int id;
-	in >> id;
-	while (id < 0 ) {
-		std::cout << "Incorrect Id!" << std::endl;
-		cout << "Enter id:";
-		in >> id;
-	}
-	pat._id = id;
-	cout << "Enter name:";
-	in >> pat._name;
-	cout << "Enter surname:";
-	in >> pat._surname;
-	cout << "Enter gender:";
-	in >> pat._gender;
-	cout << "Enter age:";
-	int age;
-	in >> age;
-	while (age < 0 || age > 120) {
-		std::cout << "Incorrect Age!" << std::endl;
-		cout << "Enter age:";
-		in >> age;
-	}
-	pat._age = age;
-	cout << "Enter diagnosis:";
-	in >> pat._diagnosis;
-	cout << "Enter status:";
-	in >> pat._status;
-	cout << "Enter doctor:";
-	in >> pat._doctor;
-	cout << "Enter department:";
-	in >> pat._department;
-	cout << "Remaining days: ";
-	int days;
-	in >> days;
-	while (days < 0 || days > 365) {
-		std::cout << "Incorrect days!" << std::endl;
-		cout << "Remaining days: ";
-		in >> days;
-	}
-	pat._days = days;
-	return in;
+
+SocketWrapper& operator>>(SocketWrapper& socket, Patient& pat) {
+    std::string input;
+
+    // Запрос ID
+    socket.send("Enter ID: ");
+    socket >> input;
+
+    int id;
+    if (std::all_of(input.begin(), input.end(), std::isdigit)) {
+        std::cout << typeid(input).name() << std::endl;
+        id = std::stoi(input);
+    }
+    else {
+        id = 0;
+        std::cout << "incorect" << std::endl;
+    }
+    while (id < 0) {
+        socket.send("Incorrect ID! Enter ID: ");
+        socket >> input;
+        std::cout << typeid(input).name() << std::endl;
+        id = std::stoi(input);
+    }
+    pat._id = id;
+
+    // Запрос имени
+    socket.send("Enter name: ");
+    socket >> pat._name;
+
+    // Запрос фамилии
+    socket.send("Enter surname: ");
+    socket >> pat._surname;
+
+    // Запрос пола
+    socket.send("Enter gender: ");
+    socket >> pat._gender;
+
+    // Запрос возраста
+    socket.send("Enter age: ");
+    socket >> input;
+    int age = std::stoi(input);
+    while (age < 0 || age > 120) {
+        socket.send("Incorrect age! Enter age: ");
+        socket >> input;
+        std::cout << typeid(input).name() << std::endl;
+        age = std::stoi(input);
+    }
+    pat._age = age;
+
+    // Запрос диагноза
+    socket.send("Enter diagnosis: ");
+    socket >> pat._diagnosis;
+
+    // Запрос статуса
+    socket.send("Enter status: ");
+    socket >> pat._status;
+
+    // Запрос врача
+    socket.send("Enter doctor: ");
+    socket >> pat._doctor;
+
+    // Запрос отдела
+    socket.send("Enter department: ");
+    socket >> pat._department;
+
+    // Запрос оставшихся дней
+    socket.send("Remaining days: ");
+    socket >> input;
+    int days = std::stoi(input);
+    while (days < 0 || days > 365) {
+        socket.send("Incorrect days! Remaining days: ");
+        socket >> input;
+        std::cout << typeid(input).name() << std::endl;
+        days = std::stoi(input);
+    }
+    pat._days = days;
+
+    return socket;
 }
 
 ostream& operator <<(ostream& out, Patient& pat) {

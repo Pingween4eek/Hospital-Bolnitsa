@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <cstring>
+#include "socket_wrapper.h"
 
 class Patient {
 	int _id;
@@ -18,7 +19,7 @@ class Patient {
 	int _days;
 public:
 	/// Enter patient's paramethers
-	 friend std::istream& operator >>(std::istream& in, Patient& pat); 
+	 //friend std::istream& operator >>(std::istream& in, Patient& pat); 
 	 /// Output patient's paramethers
 	 friend std::ostream& operator <<(std::ostream& out, Patient& pat); 
 
@@ -51,4 +52,6 @@ public:
 	 friend void search_patient(std::vector<Patient> arr); 
 	 /// Delete patient by name
 	 friend void delete_patient(std::vector<Patient> arr); 
+	 friend SocketWrapper& operator>>(SocketWrapper& socket, Patient& pat);
+	 //friend std::istream& operator >>(std::istream& in, Patient& pat);
 };

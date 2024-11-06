@@ -3,6 +3,13 @@
 #include <fstream>
 #include "database.h"
 #include "Patient.h"
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#include <sstream>
+#include <algorithm> 
+#include "send_message.h"
+#include "receive_message.h"
+#include <typeinfo>
 
 bool flag = true;
 
@@ -14,19 +21,48 @@ std::string to_lower(const std::string& str) {
     return result;
 }
 
+
 namespace patient_db {
-    void create_patients(std::vector<Patient>* arr) {
+    void create_patients(SOCKET *client_socket, std::vector<Patient>* arr) {
+        SocketWrapper client(*client_socket);
+
+        const char* message = "Enter number of patients = ";
+        sendMessage(client_socket, message);
+        
         int n;
-        std::cout << "Enter number of patients = ";
-        std::cin >> n;
+        //std::cout << "Enter number of patients = ";
+        //std::cin >> n;
+        //std::string nt = receiveMessage(client_socket);
+        //std::cout << nt << std::endl;
+        std::string nt = receiveMessage(*client_socket);
+        //std::cout << typeid(nt).name() << std::endl;
+        if (std::all_of(nt.begin(), nt.end(), std::isdigit) && (!nt.empty())) {
+            std::cout << "Norm";
+            std::cout << typeid(nt).name() << std::endl;
+            n = stoi(nt);
+            //std::cout << typeid(n).name() << std::endl;
+        }
+            
+        else {
+            std::cout << "N not digit" << std::endl;
+            n = 0;
+        }
         if (n <= 0) return;
 
         arr->clear();
         Patient patient;
         for (int i = 0; i < n; i++) {
-            std::cin >> patient;
+            //client >> patient;
+            client >> patient;
             arr->push_back({ patient });
         }
+
+        std::cout << "func client_socket = " << client_socket << std::endl;
+        write_patients(*arr);
+         // Завершение работы с клиентом, закрываем сокет
+        sendMessage(client_socket, "CLOSE");
+        closesocket(*client_socket);
+        std::cout << "Client connection closed. Waiting for reconnection..." << std::endl; //сообщ клиенту о закрытии сокета
     }
     void write_patients(std::vector<Patient> arr) {
         if (arr.empty()) return;
@@ -46,6 +82,7 @@ namespace patient_db {
     }
 
     void read_patients(std::vector<Patient>* arr) {
+        //SocketWrapper client(client_socket);
         std::ifstream in("patients.txt");
         if (!in) return;
 
@@ -55,10 +92,10 @@ namespace patient_db {
 
         *arr = {};
         Patient patient;
-        for (int i = 0; i < n; i++) {
-            in >> patient;
-            arr->push_back({ patient });
-        }
+        //for (int i = 0; i < n; i++) {
+            //in >> patient;
+            //arr->push_back({ patient });
+        //}
 
         in.close();
     }
@@ -70,8 +107,8 @@ namespace patient_db {
         }
 
         Patient c;
-        std::cin >> c;
-        arr->push_back({ c });
+        //std::cin >> c;
+        //arr->push_back({ c });
     }
 
     void delete_patient(std::vector<Patient>* arr) {
