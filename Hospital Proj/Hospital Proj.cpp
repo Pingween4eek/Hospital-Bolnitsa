@@ -80,6 +80,7 @@ int main() {
 	const char* message_2 = "1 - Create, 2 - write, 3 - read, 4 - add, 5 - search, 6 - delete, 7 - print, 8 - exit";
 	while (key != 3) {
 		// Отправка сообщения клиенту
+		moment = true;
 		sendMessage(&client_socket, message);
 		//send(client_socket, message, strlen(message), 0);
 		//std::cout << "Message sent to client" << std::endl;
@@ -87,7 +88,7 @@ int main() {
 		// Чтение сообщения от клиента
 		std::string key_st = receiveMessage(client_socket);
 		if ((std::all_of(key_st.begin(), key_st.end(), std::isdigit)) && (!key_st.empty())) {
-			std::cout << typeid(key_st).name() << std::endl;
+			//std::cout << typeid(key_st).name() << std::endl;
 			key = stoi(key_st);
 		}
 		else {
@@ -109,7 +110,7 @@ int main() {
 				while (w) {
 					//int key_pat;
 					//const char* message_2 = "1 - Create, 2 - write, 3 - read, 4 - add, 5 - search, 6 - delete, 7 - print, 8 - exit";
-					std::cout << "client_socket = " << client_socket << std::endl;
+					//std::cout << "client_socket = " << client_socket << std::endl;
 					sendMessage(&client_socket, message_2);
 					//send(client_socket, message_2, strlen(message_2), 0);
 					//cout << "1 - Create, 2 - write, 3 - read, 4 - add, 5 - search, 6 - delete, 7 - print, 8 - exit" << endl;
@@ -122,7 +123,7 @@ int main() {
 					//std::replace(key_pat_st.begin(), key_pat_st.end(), '\n', ' ');
 
 					if (std::all_of(key_pat_st.begin(), key_pat_st.end(), std::isdigit) && (!key_pat_st.empty())) {
-						std::cout << typeid(key_pat_st).name() << std::endl;
+						//std::cout << typeid(key_pat_st).name() << std::endl;
 						key_pat = stoi(key_pat_st);
 					}
 					else {				
@@ -132,6 +133,7 @@ int main() {
 						key_pat = 11;
 						std::cout << "error 2" << std::endl;
 						w = false;
+						moment = false;
 					}
 
 					if (!key_pat) {
@@ -153,8 +155,7 @@ int main() {
 						
 						break;
 					case 2:
-						std::cout << "2" << std::endl;
-						//patient_db::write_patients(temp);
+						patient_db::write_patients(temp);
 						break;
 					case 3:
 						patient_db::read_patients(&temp);
@@ -176,9 +177,11 @@ int main() {
 						break;
 					default:
 						w = false;
+						moment = false;
 						break;
 					}
 				}
+				break;
 			}
 			case 2:
 			{
@@ -186,6 +189,7 @@ int main() {
 
 				if (temp.empty()) {
 					const char* message_3 = "First create list of patients with command 'create'";
+					std::cout << "okak" << std::endl;
 					send(client_socket, message_3, strlen(message_3), 0);
 					//std::cout << "First create list of patients with command 'create'" << std::endl;
 				}				

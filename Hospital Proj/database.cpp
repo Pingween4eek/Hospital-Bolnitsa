@@ -37,8 +37,7 @@ namespace patient_db {
         std::string nt = receiveMessage(*client_socket);
         //std::cout << typeid(nt).name() << std::endl;
         if (std::all_of(nt.begin(), nt.end(), std::isdigit) && (!nt.empty())) {
-            std::cout << "Norm";
-            std::cout << typeid(nt).name() << std::endl;
+            //std::cout << typeid(nt).name() << std::endl;
             n = stoi(nt);
             //std::cout << typeid(n).name() << std::endl;
         }
@@ -47,7 +46,7 @@ namespace patient_db {
             std::cout << "N not digit" << std::endl;
             n = 0;
         }
-        if (n <= 0) return;
+        //if (n <= 0) return;
 
         arr->clear();
         Patient patient;
@@ -57,7 +56,7 @@ namespace patient_db {
             arr->push_back({ patient });
         }
 
-        std::cout << "func client_socket = " << client_socket << std::endl;
+        //std::cout << "func client_socket = " << client_socket << std::endl;
         write_patients(*arr);
          // «авершение работы с клиентом, закрываем сокет
         sendMessage(client_socket, "CLOSE");
