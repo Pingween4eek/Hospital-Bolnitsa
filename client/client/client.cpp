@@ -98,7 +98,7 @@ int main() {
             c = 0;
 
         message = b;
-        std::cout << typeid(b).name() << std::endl;
+        //std::cout << typeid(b).name() << std::endl;
         std::replace(b.begin(), b.end(), '\n', ' ');
         // Отправка сообщения серверу
         send(sock, b.c_str(), b.length(), 0);  // Отправляем строку как массив символов
