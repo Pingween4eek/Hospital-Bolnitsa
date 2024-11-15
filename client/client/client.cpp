@@ -54,7 +54,7 @@ int main() {
 
     std::string b = "0";
     int c = stoi(b);
-    while (c != 3){
+    while (true){
         // Считывание сообщения от сервера
         int recv_len = recv(sock, recv_buffer, 1024, 0);
         if (recv_len > 0) {
@@ -84,6 +84,11 @@ int main() {
                     std::cout << "Message from server: " << buffer << std::endl;
                 }
             }
+
+            else if (buffer == "STOP") {
+                break;
+            }
+
             else
                 std::cout << "Message from server: " << buffer << std::endl;
         }
