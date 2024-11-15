@@ -89,6 +89,50 @@ int main() {
                 break;
             }
 
+            else if (buffer == "PATIENT") {
+                recv_len = recv(sock, recv_buffer, 1024, 0);
+                buffer = std::string(recv_buffer, recv_len);
+                std::cout << "Id: " << buffer << std::endl;
+
+                recv_len = recv(sock, recv_buffer, 1024, 0);
+                buffer = std::string(recv_buffer, recv_len);
+                std::cout << "Name: " << buffer << std::endl;
+
+                recv_len = recv(sock, recv_buffer, 1024, 0);
+                buffer = std::string(recv_buffer, recv_len);
+                std::cout << "Surname: " << buffer << std::endl;
+
+                recv_len = recv(sock, recv_buffer, 1024, 0);
+                buffer = std::string(recv_buffer, recv_len);
+                std::cout << "Gender: " << buffer << std::endl;
+
+                recv_len = recv(sock, recv_buffer, 1024, 0);
+                buffer = std::string(recv_buffer, recv_len);
+                std::cout << "Age: " << buffer << std::endl;
+
+                recv_len = recv(sock, recv_buffer, 1024, 0);
+                buffer = std::string(recv_buffer, recv_len);
+                std::cout << "Diagnosis: " << buffer << std::endl;
+
+                recv_len = recv(sock, recv_buffer, 1024, 0);
+                buffer = std::string(recv_buffer, recv_len);
+                std::cout << "Status: " << buffer << std::endl;
+
+                recv_len = recv(sock, recv_buffer, 1024, 0);
+                buffer = std::string(recv_buffer, recv_len);
+                std::cout << "Doctor: " << buffer << std::endl;
+
+                recv_len = recv(sock, recv_buffer, 1024, 0);
+                buffer = std::string(recv_buffer, recv_len);
+                std::cout << "Department: " << buffer << std::endl;
+
+                recv_len = recv(sock, recv_buffer, 1024, 0);
+                buffer = std::string(recv_buffer, recv_len);
+                std::cout << "Days: " << buffer << std::endl;
+
+                std::cout << "Enter 'ok' to continue" << std::endl;
+            }
+
             else
                 std::cout << "Message from server: " << buffer << std::endl;
         }
