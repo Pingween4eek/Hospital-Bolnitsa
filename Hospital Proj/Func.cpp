@@ -90,6 +90,21 @@ SocketWrapper& operator>>(SocketWrapper& socket, Patient& pat) {
     return socket;
 }
 
+istream& operator >>(istream& in, Patient& pat) {
+    in >> pat._id;
+    in >> pat._name;
+    in >> pat._surname;
+    in >> pat._gender;
+    in >> pat._age;
+    in >> pat._diagnosis;
+    in >> pat._status;
+    in >> pat._doctor;
+    in >> pat._department;
+    in >> pat._days;
+
+    return in;
+}
+
 ostream& operator <<(ostream& out, Patient& pat) {
 	cout << " Id: ";
 	out << pat._id << endl;

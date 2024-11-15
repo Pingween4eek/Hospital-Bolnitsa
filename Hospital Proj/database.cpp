@@ -91,10 +91,10 @@ namespace patient_db {
 
         *arr = {};
         Patient patient;
-        //for (int i = 0; i < n; i++) {
-            //in >> patient;
-            //arr->push_back({ patient });
-        //}
+        for (int i = 0; i < n; i++) {
+            in >> patient;
+            arr->push_back({ patient });
+        }
 
         in.close();
     }

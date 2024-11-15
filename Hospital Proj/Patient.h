@@ -22,6 +22,7 @@ public:
 	 //friend std::istream& operator >>(std::istream& in, Patient& pat); 
 	 /// Output patient's paramethers
 	 friend std::ostream& operator <<(std::ostream& out, Patient& pat); 
+	 friend std::istream& operator >>(std::istream& in, Patient& pat);
 
 	 int getId();
 	 int getAge();
@@ -53,5 +54,6 @@ public:
 	 /// Delete patient by name
 	 friend void delete_patient(std::vector<Patient> arr); 
 	 friend SocketWrapper& operator>>(SocketWrapper& socket, Patient& pat);
+	 
 	 //friend std::istream& operator >>(std::istream& in, Patient& pat);
 };

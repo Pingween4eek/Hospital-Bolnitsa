@@ -95,6 +95,7 @@ int main() {
 			key = 3;
 			std::cout << "error" << std::endl;
 		}
+
 		//key = stoi(receiveMessage(client_socket));
 		//int recv_len = recv(client_socket, recv_buffer, 1024, 0);  // Получаем данные в char[]
 		//if (recv_len > 0) {
@@ -203,6 +204,7 @@ int main() {
 			}
 			default: {
 				moment = false;
+				sendMessage(&client_socket, "STOP");
 				break;
 
 			}
