@@ -29,3 +29,10 @@ SocketWrapper& SocketWrapper::operator>>(std::string& message) {
     }
     return *this;
 }
+
+SocketWrapper& SocketWrapper::operator<<(std::string& message) {
+    //std::cout << "message = " << message << std::endl;
+    send(message);
+
+    return *this;
+}

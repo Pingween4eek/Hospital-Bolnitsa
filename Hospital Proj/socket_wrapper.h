@@ -13,6 +13,7 @@ public:
 
     // Перегрузка оператора >> для приема данных
     SocketWrapper& operator>>(std::string& message);
+    SocketWrapper& operator<<(std::string& message);
 
 private:
     SOCKET clientSocket;

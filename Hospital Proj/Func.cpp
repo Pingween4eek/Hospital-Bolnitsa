@@ -105,6 +105,28 @@ istream& operator >>(istream& in, Patient& pat) {
     return in;
 }
 
+SocketWrapper& operator<<(SocketWrapper& socket, Patient& pat) {
+    std::string id = std::to_string(pat._id);
+    socket << id;
+        
+    socket << pat._name;
+    socket << pat._surname;
+    socket << pat._gender;
+
+    std::string age = std::to_string(pat._age);
+    socket << age;
+
+    socket << pat._diagnosis;
+    socket << pat._status;
+    socket << pat._doctor;
+    socket << pat._department;
+
+    std::string days = std::to_string(pat._days);
+    socket << days;
+
+    return socket;
+}
+
 ostream& operator <<(ostream& out, Patient& pat) {
 	cout << " Id: ";
 	out << pat._id << endl;

@@ -4,6 +4,7 @@
 #include <vector>
 #include <cstring>
 #include "socket_wrapper.h"
+//#include "database.h"
 
 class Patient {
 	int _id;
@@ -50,10 +51,11 @@ public:
 	 void advance_day(); 
 
 	 /// Search patient by name
-	 friend void search_patient(std::vector<Patient> arr); 
+	 
 	 /// Delete patient by name
 	 friend void delete_patient(std::vector<Patient> arr); 
 	 friend SocketWrapper& operator>>(SocketWrapper& socket, Patient& pat);
+	 friend SocketWrapper& operator<<(SocketWrapper& socket, Patient& pat);
 	 
 	 //friend std::istream& operator >>(std::istream& in, Patient& pat);
 };

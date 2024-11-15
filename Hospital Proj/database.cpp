@@ -140,15 +140,22 @@ namespace patient_db {
         }
     }
 
-    void search_patient(std::vector<Patient> arr) {
+    void search_patient(SOCKET* client_socket, std::vector<Patient> arr) {
+        SocketWrapper client(*client_socket);
+
         if (arr.empty()) {
-            std::cout << "First create list of patients with command 'create'" << std::endl;
+            sendMessage(client_socket, "First create list of patients with command 'create' Print 'ok' to continue");
+            std::string pusto = receiveMessage(*client_socket);
+
+            sendMessage(client_socket, "CLOSE");
+            closesocket(*client_socket);
+            std::cout << "Client connection closed. Waiting for reconnection..." << std::endl; //сообщ клиенту о закрытии сокета
+
             return;
         }
-
-        std::string patient;
-        std::cout << "What patient you looking for? (Enter surname): ";
-        std::cin >> patient;
+    
+        sendMessage(client_socket, "What patient you looking for? (Enter surname): ");
+        std::string patient = receiveMessage(*client_socket);
 
         patient = to_lower(patient);
         bool flag = false;
@@ -161,11 +168,22 @@ namespace patient_db {
                 flag = true;
             }
         }
-        if (flag) std::cout << arr[id];
+        if (flag) {
+            sendMessage(client_socket, "PATIENT");
+            client << arr[id];
+            std::string pusto = receiveMessage(*client_socket);
+        }
         else {
             std::cout << "There are no matches" << std::endl;
+            sendMessage(client_socket, "CLOSE");
+            closesocket(*client_socket);
+            std::cout << "Client connection closed. Waiting for reconnection..." << std::endl; //сообщ клиенту о закрытии сокета
+
             return;
         }
+        sendMessage(client_socket, "CLOSE");
+        closesocket(*client_socket);
+        std::cout << "Client connection closed. Waiting for reconnection..." << std::endl; //сообщ клиенту о закрытии сокета
     }
 
     void print_patients(std::vector<Patient> arr) {

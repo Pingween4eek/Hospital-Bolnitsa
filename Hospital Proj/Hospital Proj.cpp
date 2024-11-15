@@ -163,7 +163,15 @@ int main() {
 						break;
 					case 5:
 					{
-						patient_db::search_patient(temp);
+						patient_db::search_patient(&client_socket, temp);
+						client_socket = accept(server_socket, (struct sockaddr*)&client_addr, &client_addr_len);
+						//Проверка подключения
+						if (client_socket == INVALID_SOCKET) {
+							std::cerr << "Accept failed: " << WSAGetLastError() << std::endl;
+							closesocket(server_socket);
+							WSACleanup();
+							return 1;
+						}
 						break;
 					}
 					case 4:
