@@ -110,17 +110,24 @@ namespace patient_db {
         //arr->push_back({ c });
     }
 
-    void delete_patient(std::vector<Patient>* arr) {
+    void delete_patient(SOCKET* client_socket, std::vector<Patient>* arr) {
+        SocketWrapper client(*client_socket);
+
         if (arr->empty()) {
-            std::cout << "List of patients doesnt exist" << std::endl;
+            sendMessage(client_socket, "List of patients doesnt exist");
+            std::string pusto = receiveMessage(*client_socket);
+
+            sendMessage(client_socket, "CLOSE");
+            closesocket(*client_socket);
+            std::cout << "Client connection closed. Waiting for reconnection..." << std::endl; //сообщ клиенту о закрытии сокета
+
             return;
         }
 
-        std::cout << "Enter the surname of patient you want to delete: ";
-        std::string patient;
+        sendMessage(client_socket, "Enter the surname of patient you want to delete: ");
+        std::string patient = receiveMessage(*client_socket);
         int id;
         int n = arr->size();
-        std::cin >> patient;
         patient = to_lower(patient);
         bool flag = false;
 
@@ -131,13 +138,21 @@ namespace patient_db {
             }
         }
         if (flag) {
+            sendMessage(client_socket, "Patient was delete, enter 'ok' to continue");
             arr->erase(arr->begin() + id);
+            std::string pusto = receiveMessage(*client_socket);
         }
 
         else {
-            std::cout << "This patient doesn't exist" << std::endl;
+            sendMessage(client_socket, "This patient doesn't exist");
+            sendMessage(client_socket, "CLOSE");
+            closesocket(*client_socket);
+            std::cout << "Client connection closed. Waiting for reconnection..." << std::endl; //сообщ клиенту о закрытии сокета
             return;
         }
+        sendMessage(client_socket, "CLOSE");
+        closesocket(*client_socket);
+        std::cout << "Client connection closed. Waiting for reconnection..." << std::endl; //сообщ клиенту о закрытии сокета
     }
 
     void search_patient(SOCKET* client_socket, std::vector<Patient> arr) {

@@ -179,7 +179,16 @@ int main() {
 						patient_db::add_patient(&temp);
 						break;
 					case 6:
-						patient_db::delete_patient(&temp);
+						patient_db::delete_patient(&client_socket, &temp);
+						client_socket = accept(server_socket, (struct sockaddr*)&client_addr, &client_addr_len);
+						//Проверка подключения
+						if (client_socket == INVALID_SOCKET) {
+							std::cerr << "Accept failed: " << WSAGetLastError() << std::endl;
+							closesocket(server_socket);
+							WSACleanup();
+							return 1;
+						}
+
 						break;
 					case 7:
 						patient_db::print_patients(temp);
