@@ -22,7 +22,7 @@ std::string to_lower(const std::string& str) {
 }
 
 
-namespace patient_db {
+namespace patient_db{
     void create_patients(SOCKET *client_socket, std::vector<Patient>* arr) {
         SocketWrapper client(*client_socket);
 
@@ -99,16 +99,28 @@ namespace patient_db {
         in.close();
     }
 
-    void add_patient(std::vector<Patient>* arr) {
+    void add_patient(SOCKET* client_socket, std::vector<Patient>* arr) {
+        SocketWrapper client(*client_socket);
         if (arr->empty()) {
-            std::cout << "First create list of patient with command 'create'" << std::endl;
+            sendMessage(client_socket, "First create list of patient with command 'create'");
+            std::string pusto = receiveMessage(*client_socket);
+            sendMessage(client_socket, "CLOSE");
+            closesocket(*client_socket);
+            std::cout << "Client connection closed. Waiting for reconnection..." << std::endl; //сообщ клиенту о закрытии сокета
+
             return;
         }
 
-        Patient c;
-        //std::cin >> c;
-        //arr->push_back({ c });
+        Patient patient;
+        client >> patient;
+        arr->push_back(patient);
+        sendMessage(client_socket, "Patient added successfully.");
+        std::string pusto = receiveMessage(*client_socket);
+        sendMessage(client_socket, "CLOSE");
+        closesocket(*client_socket);
+        std::cout << "Client connection closed. Waiting for reconnection..." << std::endl; //сообщ клиенту о закрытии сокета
     }
+    
 
     void delete_patient(SOCKET* client_socket, std::vector<Patient>* arr) {
         SocketWrapper client(*client_socket);
@@ -201,10 +213,11 @@ namespace patient_db {
         std::cout << "Client connection closed. Waiting for reconnection..." << std::endl; //сообщ клиенту о закрытии сокета
     }
 
-    void print_patients(std::vector<Patient> arr) {
+    void print_patients(SOCKET* client_socket, std::vector<Patient> arr) {
         if (arr.empty()) {
             std::cout << "List of patients doesnt exist" << std::endl;
             return;
+
         }
 
         int n = arr.size();

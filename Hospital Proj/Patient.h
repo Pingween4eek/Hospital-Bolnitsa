@@ -53,7 +53,7 @@ public:
 	 /// Search patient by name
 	 
 	 /// Delete patient by name
-	 friend void delete_patient(std::vector<Patient> arr); 
+	 friend void delete_patient(SOCKET* client_socket, std::vector<Patient>* arr);
 	 friend SocketWrapper& operator>>(SocketWrapper& socket, Patient& pat);
 	 friend SocketWrapper& operator<<(SocketWrapper& socket, Patient& pat);
 	 
