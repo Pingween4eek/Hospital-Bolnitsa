@@ -18,6 +18,7 @@ int main() {
     std::string message = "4";  // Используем std::string для сообщения
     std::string buffer;  // Используем std::string для буфера
     char recv_buffer[1024] = { 0 };  // Буфер для получения данных через recv()
+    bool flag = false;
 
     // Инициализация Winsock
     if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
@@ -130,7 +131,8 @@ int main() {
                 buffer = std::string(recv_buffer, recv_len);
                 std::cout << "Days: " << buffer << std::endl;
 
-                std::cout << "Enter 'ok' to continue" << std::endl;
+                //std::cout << "Enter 'ok' to continue" << std::endl;
+                flag = true;
             }
 
             else
@@ -139,12 +141,18 @@ int main() {
         //std::string str = std::to_string(b);  // Преобразуем int в std::string
         //message = str.c_str();  // Преобразуем std::string в const char*
 
-        std::cin >> b;
-        if (std::all_of(b.begin(), b.end(), std::isdigit)) {
-            c = stoi(b);
-        }  
-        else
-            c = 0;
+        if (!flag) {
+            std::cin >> b;
+            if (std::all_of(b.begin(), b.end(), std::isdigit)) {
+                c = stoi(b);
+            }
+            else
+                c = 0;
+        }
+        else {
+            b = "next_action";
+            flag = false;
+        }
 
         message = b;
         //std::cout << typeid(b).name() << std::endl;
