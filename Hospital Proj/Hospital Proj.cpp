@@ -81,29 +81,52 @@ int main() {
 	while (key != 3) {
 		// Отправка сообщения клиенту
 		moment = true;
-		sendMessage(&client_socket, message);
+		//sendMessage(&client_socket, message);
 		//send(client_socket, message, strlen(message), 0);
 		//std::cout << "Message sent to client" << std::endl;
 
 		// Чтение сообщения от клиента
-		std::string key_st = receiveMessage(client_socket);
-		if ((std::all_of(key_st.begin(), key_st.end(), std::isdigit)) && (!key_st.empty())) {
+		//std::string key_st = receiveMessage(client_socket);
+		//if ((std::all_of(key_st.begin(), key_st.end(), std::isdigit)) && (!key_st.empty())) {
 			//std::cout << typeid(key_st).name() << std::endl;
-			key = stoi(key_st);
-		}
-		else {
-			key = 3;
-			std::cout << "error" << std::endl;
-		}
+			//key = stoi(key_st);
+		//}
+		//else {
+			//key = 3;
+			//std::cout << "error" << std::endl;
+		//}
 
 		//key = stoi(receiveMessage(client_socket));
 		//int recv_len = recv(client_socket, recv_buffer, 1024, 0);  // Получаем данные в char[]
 		//if (recv_len > 0) {
 			//buffer = std::string(recv_buffer, recv_len);  // Преобразуем в std::string
 			
-		std::cout << "Message from client: " << key << std::endl;
+		//std::cout << "Message from client: " << key << std::endl;
 		//}
 		while (moment) {
+			sendMessage(&client_socket, message);
+			std::string key_st = receiveMessage(client_socket);
+
+			if (std::all_of(key_st.begin(), key_st.end(), std::isdigit) && (!key_st.empty())) {
+				//std::cout << typeid(key_pat_st).name() << std::endl;
+				key = stoi(key_st);
+				std::cout << "key" << std::endl;
+			}
+			else {
+				std::cout << "key_st: " << key_st << std::endl;
+				//continue;
+				std::string cache = receiveMessage(client_socket);
+				key = 11;
+				std::cout << "error 2" << std::endl;
+				w = false;
+				moment = false;
+			}
+
+			if (!key) {
+				cout << "Error" << endl;
+				break;
+			}
+
 			switch (key) {
 			case 1:
 			{
@@ -126,6 +149,7 @@ int main() {
 					if (std::all_of(key_pat_st.begin(), key_pat_st.end(), std::isdigit) && (!key_pat_st.empty())) {
 						//std::cout << typeid(key_pat_st).name() << std::endl;
 						key_pat = stoi(key_pat_st);
+						std::cout << "key_pat" << std::endl;
 					}
 					else {				
 						std::cout << "key_pat_st: " << key_pat_st << std::endl;
@@ -216,7 +240,7 @@ int main() {
 						break;
 					default:
 						w = false;
-						moment = false;
+						//moment = false;
 						break;
 					}
 				}
@@ -224,15 +248,16 @@ int main() {
 			}
 			case 2:
 			{
-				patient_db::read_patients(&temp);
+				//patient_db::read_patients(&temp);
 
 				if (temp.empty()) {
-					const char* message_3 = "First create list of patients with command 'create'";
-					std::cout << "okak" << std::endl;
+					const char* message_3 = "First create list of patients with command 'create'. Print 'ok' to continue";
 					send(client_socket, message_3, strlen(message_3), 0);
+					std::string pusto = receiveMessage(client_socket);
 					//std::cout << "First create list of patients with command 'create'" << std::endl;
-				}				
+				}
 				else
+					std::cout << temp.size();
 					for (int i = 0; i < temp.size(); i++) {
 						temp[i].advance_day();
 						patient_db::write_patients(temp);

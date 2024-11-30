@@ -29,11 +29,8 @@ void Patient::advance_day() {
     if (!(_status == "discharged")) {
         _days--;
         if (_days <= 0) {
-            int a = rand() % 10;
-            if (a < 9)
-                _status = "discharged";
-            else
-                _status = "died";
+            _status = "discharged";
+
         }
     }
 }
