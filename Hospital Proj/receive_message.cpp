@@ -7,11 +7,13 @@ std::string receiveMessage(SOCKET client_socket) {
 
     if (recvResult == SOCKET_ERROR) {
         std::cerr << "Failed to receive message: " << WSAGetLastError() << std::endl;
-        return "";
+        closesocket(client_socket);
+        return "ERROR001RECEIVE";
     }
     else if (recvResult == 0) {
         std::cout << "Connection closed by client." << std::endl;
-        return "";
+        closesocket(client_socket);
+        return "ERROR001RECEIVE";
     }
     std::cout << "Client message: " << std::string(buffer, recvResult) << std::endl;
 

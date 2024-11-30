@@ -23,7 +23,7 @@ std::string to_lower(const std::string& str) {
 
 
 namespace patient_db{
-    void create_patients(SOCKET *client_socket, std::vector<Patient>* arr) {
+    std::string create_patients(SOCKET *client_socket, std::vector<Patient>* arr) {
         SocketWrapper client(*client_socket);
         sendMessage(client_socket, "Enter number of patients = ");
         
@@ -31,6 +31,9 @@ namespace patient_db{
 
         while (n < 0) {
             std::string nt = receiveMessage(*client_socket);
+            if (nt == "ERROR001RECEIVE") {
+                return "ERROR001RECEIVE";
+            }
 
             if (std::all_of(nt.begin(), nt.end(), std::isdigit) && (!nt.empty())) {
                 n = stoi(nt);
@@ -45,7 +48,7 @@ namespace patient_db{
             sendMessage(client_socket, "CLOSE");
             closesocket(*client_socket);
             std::cout << "Client connection closed. Waiting for reconnection..." << std::endl;
-            return;
+            return "ok";
         }
             
 
@@ -55,6 +58,10 @@ namespace patient_db{
             client >> patient;
             arr->push_back({ patient });
         }
+        
+        if (patient.getDays() == 75) {
+            return "ERROR001RECEIVE";
+        }
 
         write_patients(*arr);
 
@@ -62,6 +69,7 @@ namespace patient_db{
         sendMessage(client_socket, "CLOSE");
         closesocket(*client_socket);
         std::cout << "Client connection closed. Waiting for reconnection..." << std::endl; //сообщ клиенту о закрытии сокета
+        return "ok";
     }
     void write_patients(std::vector<Patient> arr) {
         if (arr.empty()) return;
@@ -155,7 +163,9 @@ namespace patient_db{
         }
 
         else {
-            sendMessage(client_socket, "This patient doesn't exist");
+            sendMessage(client_socket, "This patient doesn't exist, enter 'ok' to continue");
+            std::string pusto = receiveMessage(*client_socket);
+
             sendMessage(client_socket, "CLOSE");
             closesocket(*client_socket);
             std::cout << "Client connection closed. Waiting for reconnection..." << std::endl; //сообщ клиенту о закрытии сокета

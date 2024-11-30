@@ -18,7 +18,8 @@ SocketWrapper& SocketWrapper::operator>>(std::string& message) {
 
     if (recvResult == SOCKET_ERROR) {
         std::cerr << "Error receiving data: " << WSAGetLastError() << std::endl;
-        message.clear();
+        message = "75";
+        closesocket(clientSocket);
     }
     else if (recvResult == 0) {
         std::cout << "Client disconnected." << std::endl;

@@ -40,11 +40,38 @@ SocketWrapper& operator>>(SocketWrapper& socket, Patient& pat) {
 
     // Запрос имени
     socket.send("Enter name: ");
-    socket >> pat._name;
+    std::string name;
+
+    socket >> name;
+
+    while (true) {
+        if (std::all_of(name.begin(), name.end(), std::isdigit) && name != "75") {
+            socket.send("Incorrect name! Enter name: ");
+            socket >> name;
+        }
+        else
+            break;
+    }
+
+    pat._name = name;
+    
 
     // Запрос фамилии
     socket.send("Enter surname: ");
-    socket >> pat._surname;
+    std::string surname;
+
+    socket >> surname;
+
+    while (true) {
+        if (std::all_of(surname.begin(), surname.end(), std::isdigit) && surname != "75") {
+            socket.send("Incorrect surname! Enter surname: ");
+            socket >> surname;
+        }
+        else
+            break;
+    }
+
+    pat._surname = surname;
 
     // Запрос пола
     socket.send("Enter gender: ");

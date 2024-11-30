@@ -8,7 +8,8 @@ void sendMessage(SOCKET *client_socket, const std::string& message) {
     int sendResult = send(*client_socket, message.c_str(), message.length(), 0);
     //std::cout << "sendresult = " << sendResult << std::endl;
     if (sendResult == SOCKET_ERROR) {
-        std::cerr << "Failed to send message (gg): " << WSAGetLastError() << std::endl;
+        std::cerr << "Failed to send message: " << WSAGetLastError() << std::endl;
+        closesocket(*client_socket);
     }
     else {
         std::cout << "Message sent to client: " << message << std::endl;

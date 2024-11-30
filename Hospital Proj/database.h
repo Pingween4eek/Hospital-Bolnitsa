@@ -9,7 +9,7 @@
 inline std::string to_lower(const std::string& str);
 
 namespace patient_db {
-	void create_patients(SOCKET *client_socket, std::vector<Patient> *arr);
+	std::string create_patients(SOCKET *client_socket, std::vector<Patient> *arr);
 	void write_patients(std::vector<Patient> arr);
 	void read_patients(std::vector<Patient> *arr);
 	void add_patient(SOCKET* client_socket, std::vector<Patient> *arr);
