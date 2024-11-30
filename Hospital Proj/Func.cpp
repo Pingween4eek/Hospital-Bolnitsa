@@ -20,18 +20,21 @@ SocketWrapper& operator>>(SocketWrapper& socket, Patient& pat) {
 
     int id;
     if (std::all_of(input.begin(), input.end(), std::isdigit)) {
-        std::cout << typeid(input).name() << std::endl;
         id = std::stoi(input);
     }
     else {
-        id = 0;
-        std::cout << "incorect" << std::endl;
+        id = -1;
     }
     while (id < 0) {
         socket.send("Incorrect ID! Enter ID: ");
         socket >> input;
-        std::cout << typeid(input).name() << std::endl;
-        id = std::stoi(input);
+
+        if (std::all_of(input.begin(), input.end(), std::isdigit)) {
+            id = std::stoi(input);
+        }
+        else {
+            id = -1;
+        }
     }
     pat._id = id;
 
@@ -50,12 +53,24 @@ SocketWrapper& operator>>(SocketWrapper& socket, Patient& pat) {
     // Запрос возраста
     socket.send("Enter age: ");
     socket >> input;
-    int age = std::stoi(input);
+
+    int age;
+    if (std::all_of(input.begin(), input.end(), std::isdigit)) {
+        age = std::stoi(input);
+    }
+    else {
+        age = -1;
+    }
     while (age < 0 || age > 120) {
         socket.send("Incorrect age! Enter age: ");
         socket >> input;
-        std::cout << typeid(input).name() << std::endl;
-        age = std::stoi(input);
+
+        if (std::all_of(input.begin(), input.end(), std::isdigit)) {
+            age = std::stoi(input);
+        }
+        else {
+            age = -1;
+        }
     }
     pat._age = age;
 
@@ -78,12 +93,24 @@ SocketWrapper& operator>>(SocketWrapper& socket, Patient& pat) {
     // Запрос оставшихся дней
     socket.send("Remaining days: ");
     socket >> input;
-    int days = std::stoi(input);
-    while (days < 0 || days > 365) {
-        socket.send("Incorrect days! Remaining days: ");
-        socket >> input;
-        std::cout << typeid(input).name() << std::endl;
+
+    int days;
+    if (std::all_of(input.begin(), input.end(), std::isdigit)) {
         days = std::stoi(input);
+    }
+    else {
+        days = -1;
+    }
+    while (days <= 0 || days > 365) {
+        socket.send("Incorrect days! Enter days: ");
+        socket >> input;
+
+        if (std::all_of(input.begin(), input.end(), std::isdigit)) {
+            days = std::stoi(input);
+        }
+        else {
+            days = -1;
+        }
     }
     pat._days = days;
 

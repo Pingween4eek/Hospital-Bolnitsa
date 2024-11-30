@@ -2,6 +2,8 @@
 #include <string>
 #include <ctime>
 #include "Patient.h"
+#include "send_message.h"
+#include "receive_message.h"
 
 int Patient::getId() { return _id; }
 std::string Patient::getName() { return _name; }
@@ -25,9 +27,15 @@ void Patient::setDoctor(std::string doctor) { _doctor = doctor; }
 void Patient::setDepartment(std::string department) { _department = department; }
 void Patient::setDays(int days) { _days = days; }
 
-void Patient::advance_day() {
+void Patient::advance_day(SOCKET* client_socket, int count) {
     if (!(_status == "discharged")) {
-        _days--;
+
+        for (int i = 0; i < count; i++) {
+            _days--;
+            if (_days == 0)
+                break;
+        }
+
         if (_days <= 0) {
             _status = "discharged";
 

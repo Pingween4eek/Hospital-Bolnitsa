@@ -25,39 +25,39 @@ std::string to_lower(const std::string& str) {
 namespace patient_db{
     void create_patients(SOCKET *client_socket, std::vector<Patient>* arr) {
         SocketWrapper client(*client_socket);
-
-        const char* message = "Enter number of patients = ";
-        sendMessage(client_socket, message);
+        sendMessage(client_socket, "Enter number of patients = ");
         
-        int n;
-        //std::cout << "Enter number of patients = ";
-        //std::cin >> n;
-        //std::string nt = receiveMessage(client_socket);
-        //std::cout << nt << std::endl;
-        std::string nt = receiveMessage(*client_socket);
-        //std::cout << typeid(nt).name() << std::endl;
-        if (std::all_of(nt.begin(), nt.end(), std::isdigit) && (!nt.empty())) {
-            //std::cout << typeid(nt).name() << std::endl;
-            n = stoi(nt);
-            //std::cout << typeid(n).name() << std::endl;
+        int n = -1;
+
+        while (n < 0) {
+            std::string nt = receiveMessage(*client_socket);
+
+            if (std::all_of(nt.begin(), nt.end(), std::isdigit) && (!nt.empty())) {
+                n = stoi(nt);
+            }
+            else {
+                sendMessage(client_socket, "Incorrect number! Enter number of patients = ");
+                n = -1;
+            }
+        }
+        
+        if (n <= 0) {
+            sendMessage(client_socket, "CLOSE");
+            closesocket(*client_socket);
+            std::cout << "Client connection closed. Waiting for reconnection..." << std::endl;
+            return;
         }
             
-        else {
-            std::cout << "N not digit" << std::endl;
-            n = 0;
-        }
-        //if (n <= 0) return;
 
         arr->clear();
         Patient patient;
         for (int i = 0; i < n; i++) {
-            //client >> patient;
             client >> patient;
             arr->push_back({ patient });
         }
 
-        //std::cout << "func client_socket = " << client_socket << std::endl;
         write_patients(*arr);
+
          // «авершение работы с клиентом, закрываем сокет
         sendMessage(client_socket, "CLOSE");
         closesocket(*client_socket);
@@ -81,7 +81,6 @@ namespace patient_db{
     }
 
     void read_patients(std::vector<Patient>* arr) {
-        //SocketWrapper client(client_socket);
         std::ifstream in("patients.txt");
         if (!in) return;
 
@@ -114,7 +113,7 @@ namespace patient_db{
         Patient patient;
         client >> patient;
         arr->push_back(patient);
-        sendMessage(client_socket, "Patient added successfully.");
+        sendMessage(client_socket, "Patient added successfully. Print 'ok' to continue");
         std::string pusto = receiveMessage(*client_socket);
         sendMessage(client_socket, "CLOSE");
         closesocket(*client_socket);

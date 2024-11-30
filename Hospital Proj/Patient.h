@@ -4,7 +4,6 @@
 #include <vector>
 #include <cstring>
 #include "socket_wrapper.h"
-//#include "database.h"
 
 class Patient {
 	int _id;
@@ -13,15 +12,13 @@ class Patient {
 	std::string _gender;
 	int _age;
 	std::string _diagnosis;
-	//time_t?
 	std::string _status;
 	std::string _doctor;
 	std::string _department;
 	int _days;
+
 public:
-	/// Enter patient's paramethers
-	 //friend std::istream& operator >>(std::istream& in, Patient& pat); 
-	 /// Output patient's paramethers
+
 	 friend std::ostream& operator <<(std::ostream& out, Patient& pat); 
 	 friend std::istream& operator >>(std::istream& in, Patient& pat);
 
@@ -47,15 +44,11 @@ public:
 	 void setAge(int age); 
 	 void setDia(std::string diagnosis); 
 	 void setStatus(std::string status); 
-	 /// Skip day
-	 void advance_day(); 
 
-	 /// Search patient by name
-	 
-	 /// Delete patient by name
+	 /// Skip day
+	 void advance_day(SOCKET* client_socket, int count);
+
 	 friend void delete_patient(SOCKET* client_socket, std::vector<Patient>* arr);
 	 friend SocketWrapper& operator>>(SocketWrapper& socket, Patient& pat);
 	 friend SocketWrapper& operator<<(SocketWrapper& socket, Patient& pat);
-	 
-	 //friend std::istream& operator >>(std::istream& in, Patient& pat);
 };
