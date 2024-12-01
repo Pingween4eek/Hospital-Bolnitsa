@@ -12,9 +12,9 @@ namespace patient_db {
 	std::string create_patients(SOCKET *client_socket, std::vector<Patient> *arr);
 	void write_patients(std::vector<Patient> arr);
 	void read_patients(std::vector<Patient> *arr);
-	void add_patient(SOCKET* client_socket, std::vector<Patient> *arr);
-	void search_patient(SOCKET* client_socket, std::vector<Patient> arr);
-	void delete_patient(SOCKET* client_socket, std::vector<Patient> *arr);
+	std::string add_patient(SOCKET* client_socket, std::vector<Patient> *arr);
+	std::string search_patient(SOCKET* client_socket, std::vector<Patient> arr);
+	std::string delete_patient(SOCKET* client_socket, std::vector<Patient> *arr);
 	void advance_time(std::vector<Patient> *arr, int days);
-	void print_patients(SOCKET* client_socket, std::vector<Patient> arr);
+	std::string print_patients(SOCKET* client_socket, std::vector<Patient> arr);
 }

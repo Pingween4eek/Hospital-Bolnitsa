@@ -153,7 +153,7 @@ int main() {
 								key_pat = stoi(key_pat_st);
 							}
 							else {
-								sendMessage(&client_socket, "Incorrect input! Enter number to choose action: 1 - Create list of patients, 2 - Add patient to list, 3 - Search patient, 4 - Delete patient, 5 - Print patients, 6 - Exit from programm");
+								sendMessage(&client_socket, "Incorrect input! Enter number to choose action: 1 - Create list of patients, 2 - Add patient to list, 3 - Search patient, 4 - Delete patient, 5 - Print patients, 6 - Exit");
 								key_pat_st = receiveMessage(client_socket);
 								if (key_pat_st == "ERROR001RECEIVE") {
 									std::cout << "Client disconnected" << std::endl;
@@ -195,7 +195,12 @@ int main() {
 						case 3:
 						{
 							patient_db::read_patients(&temp);
-							patient_db::search_patient(&client_socket, temp);
+							if (patient_db::search_patient(&client_socket, temp) == "ERROR001RECEIVE") {
+								w = false;
+								moment = false;
+								key = -1;
+								break;
+							}
 							client_socket = accept(server_socket, (struct sockaddr*)&client_addr, &client_addr_len);
 							//Проверка подключения
 							if (client_socket == INVALID_SOCKET) {
@@ -209,7 +214,13 @@ int main() {
 						case 2:
 
 							patient_db::read_patients(&temp);
-							patient_db::add_patient(&client_socket, &temp);
+
+							if (patient_db::add_patient(&client_socket, &temp) == "ERROR001RECEIVE") {
+								w = false;
+								moment = false;
+								key = -1;
+								break;
+							}							
 							client_socket = accept(server_socket, (struct sockaddr*)&client_addr, &client_addr_len);
 							//Проверка подключения
 							if (client_socket == INVALID_SOCKET) {
@@ -224,7 +235,12 @@ int main() {
 
 						case 4:
 							patient_db::read_patients(&temp);
-							patient_db::delete_patient(&client_socket, &temp);
+							if (patient_db::delete_patient(&client_socket, &temp) == "ERROR001RECEIVE") {
+								w = false;
+								moment = false;
+								key = -1;
+								break;
+							}
 							client_socket = accept(server_socket, (struct sockaddr*)&client_addr, &client_addr_len);
 							//Проверка подключения
 							if (client_socket == INVALID_SOCKET) {
@@ -237,7 +253,12 @@ int main() {
 
 							break;
 						case 5:
-							patient_db::print_patients(&client_socket, temp);
+							if (patient_db::print_patients(&client_socket, temp) == "ERROR001RECEIVE") {
+								w = false;
+								moment = false;
+								key = -1;
+								break;
+							}
 
 							client_socket = accept(server_socket, (struct sockaddr*)&client_addr, &client_addr_len);
 							//Проверка подключения
