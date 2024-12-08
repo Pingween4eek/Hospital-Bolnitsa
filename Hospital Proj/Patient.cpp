@@ -38,7 +38,14 @@ void Patient::advance_day(SOCKET* client_socket, int count) {
 
         if (_days <= 0) {
             _status = "discharged";
-
+            int a = rand() % 10;
+            if (a < 9)
+                _status = "discharged";
+            else {
+                _status = "died";
+                //std :: string doc = getDoctor()
+            }
         }
+
     }
 }
