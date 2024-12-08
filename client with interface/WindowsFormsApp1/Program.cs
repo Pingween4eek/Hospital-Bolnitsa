@@ -54,7 +54,7 @@ public class HexToColor
 
 }
 
-namespace SimpleInterface
+namespace WindowsFormsApp1
 {
     public class MainForm : Form
     {
@@ -72,6 +72,19 @@ namespace SimpleInterface
         private Button deletePatient;
         private Button printPatients;
         private Button exitButton2;
+       
+
+        //кнопки для работы с поиском
+        private Button send;
+        private Button exitButton3;
+        private Label label_fio;
+        private TextBox textbox_fio;
+        private Label label_id;
+        private Label label_name;
+        private Label label_fio_2;
+        private Label label_id_otvet;
+        private Label label_name_otvet;
+        private Label label_fio_2_otvet;
 
         // название проги
         private Label name;
@@ -144,6 +157,18 @@ namespace SimpleInterface
             };
             exitButton2.Click += Back; // функция, возвращающая на экран выбора действия
 
+
+            exitButton3 = new Button()
+            {
+                Text = "Назад",
+                Font = new Font("Castellar", 24, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#2e2e2e"),
+                BackColor = HexToColor.HexStringToColor("#c23838"),
+                Location = new Point(525, 500),
+                Size = new Size(200, 50),
+            };
+            exitButton3.Click += Back2; // функция, возвращающая на экран выбора действия
+
             // кнопка "Работа с пациентами"
             patientActions = new Button()
             {
@@ -192,6 +217,106 @@ namespace SimpleInterface
                 Size = new Size(275, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
+            searchPatient.Click += search;
+
+            label_fio = new Label()
+            {
+                Text = "Введите фамилию пациента:",
+                Font = new Font("Castellar", 18, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#7a0696"),
+                BackColor = HexToColor.HexStringToColor("#e6a9f5"),
+                Location = new Point(350, 200),
+                Size = new Size(275, 50),
+                TextAlign = ContentAlignment.MiddleCenter,
+            };
+
+            textbox_fio = new TextBox()
+            {
+                Font = new Font("Castellar", 18, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#7a0696"),
+                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Location = new Point(350, 350),
+                Size = new Size(275, 50),
+                
+            };
+
+            label_id = new Label()
+            {
+                Text = "ID пациента:",
+                Font = new Font("Castellar", 18, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#FFFFFF"),
+                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Location = new Point(150, 230),
+                Size = new Size(275, 50),
+                TextAlign = ContentAlignment.MiddleCenter,
+            };
+
+            label_name = new Label()
+            {
+                Text = "Имя пациента:",
+                Font = new Font("Castellar", 18, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#FFFFFF"),
+                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Location = new Point(150, 290),
+                Size = new Size(275, 50),
+                TextAlign = ContentAlignment.MiddleCenter,
+            };
+
+            label_fio_2 = new Label()
+            {
+                Text = "Фамилия пациента:",
+                Font = new Font("Castellar", 18, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#FFFFFF"),
+                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Location = new Point(150, 350),
+                Size = new Size(275, 50),
+                TextAlign = ContentAlignment.MiddleCenter,
+            };
+
+            label_id_otvet = new Label()
+            {
+                Text = "Здесь данные пациента",
+                Font = new Font("Castellar", 18, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#FFFFFF"),
+                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Location = new Point(500, 230),
+                Size = new Size(275, 50),
+                TextAlign = ContentAlignment.MiddleCenter,
+            };
+
+            label_name_otvet = new Label()
+            {
+                Text = "Здесь данные пациента",
+                Font = new Font("Castellar", 18, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#FFFFFF"),
+                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Location = new Point(500, 290),
+                Size = new Size(275, 50),
+                TextAlign = ContentAlignment.MiddleCenter,
+            };
+
+            label_fio_2_otvet = new Label()
+            {
+                Text = "Здесь данные пациента",
+                Font = new Font("Castellar", 18, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#FFFFFF"),
+                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Location = new Point(500, 350),
+                Size = new Size(275, 50),
+                TextAlign = ContentAlignment.MiddleCenter,
+            };
+            //кнопка Отправить
+            send = new Button()
+            {
+                Text = "Отправить",
+                Font = new Font("Castellar", 18, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#7a0696"),
+                BackColor = HexToColor.HexStringToColor("#e6a9f5"),
+                Location = new Point(175, 500),
+                Size = new Size(275, 50),
+                TextAlign = ContentAlignment.MiddleCenter,
+            };
+            send.Click += send_func;
 
             // кнопка "Добавить пациента"
             addPatient = new Button()
@@ -281,6 +406,39 @@ namespace SimpleInterface
             this.Controls.Add(printPatients); // Добавляем кнопку "Вывести список пациентов"
         }
 
+        // Нажатие кнопки поиск пациента
+        private void search(object sender, EventArgs e)
+        {
+            this.Controls.Remove(createPatientList); // Удаляем кнопку "Создать список пациентов"
+            this.Controls.Remove(searchPatient); // Удаляем кнопку "Поиск пациента"
+            this.Controls.Remove(addPatient); // Удаляем кнопку "Добавить пациента"
+            this.Controls.Remove(deletePatient); // Удаляем кнопку "Удалить пациента"
+            this.Controls.Remove(printPatients); // Удаляем кнопку "Вывести список пациентов"
+            this.Controls.Remove(exitButton2);
+
+            this.Controls.Add(send);
+            this.Controls.Add(exitButton3);
+            this.Controls.Add(label_fio);
+            this.Controls.Add(textbox_fio);
+
+        }
+
+        private void send_func(object sender, EventArgs e)
+        {
+            this.Controls.Remove(label_fio);
+            this.Controls.Remove(textbox_fio);
+            this.Controls.Remove(send);
+            this.Controls.Remove(exitButton3);
+
+            this.Controls.Add(exitButton);
+            this.Controls.Add(label_id);
+            this.Controls.Add(label_name);
+            this.Controls.Add(label_fio_2);
+            this.Controls.Add(label_id_otvet);
+            this.Controls.Add(label_name_otvet);
+            this.Controls.Add(label_fio_2_otvet);
+        }
+
         // Нажатие кнопки назад, тут мы возвращаем убранные и убираем добавленные кнопки в прошлой функции
         private void Back(object sender, EventArgs e)
         {
@@ -294,6 +452,25 @@ namespace SimpleInterface
             this.Controls.Remove(addPatient);
             this.Controls.Remove(deletePatient);
             this.Controls.Remove(printPatients);
+            this.Controls.Remove(send);
+            
+
+        }
+        private void Back2(object sender, EventArgs e)
+        {
+            this.Controls.Add(exitButton);
+            this.Controls.Add(patientActions);
+            this.Controls.Add(timeActions);
+
+            this.Controls.Remove(exitButton3);
+            this.Controls.Remove(createPatientList);
+            this.Controls.Remove(searchPatient);
+            this.Controls.Remove(addPatient);
+            this.Controls.Remove(deletePatient);
+            this.Controls.Remove(printPatients);
+            this.Controls.Remove(send);
+            this.Controls.Remove(label_fio);
+            this.Controls.Remove(textbox_fio);
         }
 
         [STAThread]

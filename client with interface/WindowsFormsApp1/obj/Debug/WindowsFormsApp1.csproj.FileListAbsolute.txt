@@ -7,3 +7,13 @@ C:\Users\Ivan\source\repos\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFo
 C:\Users\Ivan\source\repos\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
 C:\Users\Ivan\source\repos\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 C:\Users\Ivan\source\repos\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+D:\нгту\2 курс\hospital прога\new build 7 december\client with interface\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+D:\нгту\2 курс\hospital прога\new build 7 december\client with interface\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+D:\нгту\2 курс\hospital прога\new build 7 december\client with interface\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+D:\нгту\2 курс\hospital прога\new build 7 december\client with interface\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.AssemblyReference.cache
+D:\нгту\2 курс\hospital прога\new build 7 december\client with interface\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+D:\нгту\2 курс\hospital прога\new build 7 december\client with interface\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
+D:\нгту\2 курс\hospital прога\new build 7 december\client with interface\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
+D:\нгту\2 курс\hospital прога\new build 7 december\client with interface\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+D:\нгту\2 курс\hospital прога\new build 7 december\client with interface\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+D:\нгту\2 курс\hospital прога\new build 7 december\client with interface\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
