@@ -61,6 +61,9 @@ namespace WindowsFormsApp1
         private Button startButton;
         private Button exitButton;
 
+        // универсальная кнопка выхода
+        private Button universalBack;
+
         // кнопки на главном экране
         private Button patientActions;
         private Button timeActions;
@@ -72,7 +75,18 @@ namespace WindowsFormsApp1
         private Button deletePatient;
         private Button printPatients;
         private Button exitButton2;
-       
+        
+        //кнопки в скипе дней
+        private Button senddaysButton;
+        private Button daysexitButton;
+        private TrackBar numberTrackBar; // Ползунок
+        private Label valueLabel;        // Метка для отображения значения
+        private Label countofdays;
+
+        //кнопуи для креатива
+        private Button createsend1;
+        private Label createlabel1;
+        private TextBox createtextbox1;
 
         //кнопки для работы с поиском
         private Button send;
@@ -157,7 +171,6 @@ namespace WindowsFormsApp1
             };
             exitButton2.Click += Back; // функция, возвращающая на экран выбора действия
 
-
             exitButton3 = new Button()
             {
                 Text = "Назад",
@@ -182,6 +195,17 @@ namespace WindowsFormsApp1
             };
             patientActions.Click += Patient_Actions; // функция, удаляющая элементы экрана "Выбор действия" и добавляющая элементы экрана "Работа с пациентами"
 
+            daysexitButton = new Button()
+            {
+                Text = "Назад",
+                Font = new Font("Castellar", 24, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#2e2e2e"),
+                BackColor = HexToColor.HexStringToColor("#c23838"),
+                Location = new Point(385, 500),
+                Size = new Size(200, 50),
+            };
+            daysexitButton.Click += day_Back; // функция, возвращающая на экран выбора действия
+
             // кнопка "Работа со временем"
             timeActions = new Button()
             {
@@ -193,6 +217,78 @@ namespace WindowsFormsApp1
                 Size = new Size(375, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
+            timeActions.Click += time_Actions;
+
+            // кнопка отправления кол-ва дней
+            senddaysButton = new Button()
+            {
+                Text = "Отправить",
+                Font = new Font("Castellar", 24, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#ad7400"),
+                BackColor = HexToColor.HexStringToColor("#fffa61"),
+                Location = new Point(385, 450),
+                Size = new Size(200, 50),
+                TextAlign = ContentAlignment.MiddleCenter,
+            };
+
+            //ползунок
+            numberTrackBar = new TrackBar()
+            {
+                Location = new Point(150, 280),
+                Width = 500,
+                Minimum = 0,
+                Maximum = 50,
+                TickFrequency = 5,
+                Value = 25,
+            };
+            numberTrackBar.Scroll += NumberTrackBar_Scroll;
+
+            valueLabel = new Label()
+            {
+                Text = "Дни: ",
+                Font = new Font("Castellar", 18, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#FFFFFF"),
+                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Location = new Point(680, 270),
+                Size = new Size(275, 50),
+                TextAlign = ContentAlignment.MiddleCenter,
+            };
+
+            countofdays = new Label()
+            {
+                Text = "Выберите количество дней.",
+                Font = new Font("Castellar", 18, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#FFFFFF"),
+                BackColor = Color.Transparent,
+                Location = new Point(150, 230),
+                Size = new Size(400, 50),
+                TextAlign = ContentAlignment.MiddleLeft,
+            };
+
+            universalBack = new Button()
+            {
+                Text = "Назад",
+                Font = new Font("Castellar", 24, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#2e2e2e"),
+                BackColor = HexToColor.HexStringToColor("#c23838"),
+                Location = new Point(385, 500),
+                Size = new Size(200, 50),
+            };
+            universalBack.Click += BackToPatient;
+
+
+
+
+
+
+
+            
+
+
+
+
+
+
 
             // кнопка "Создать список пациентов"
             createPatientList = new Button()
@@ -205,6 +301,54 @@ namespace WindowsFormsApp1
                 Size = new Size(275, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
+            createPatientList.Click += create;
+
+            //отправить кол-во пациентов
+            createsend1 = new Button()
+            {
+                Text = "Отправить",
+                Font = new Font("Castellar", 24, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#ad7400"),
+                BackColor = HexToColor.HexStringToColor("#fffa61"),
+                Location = new Point(385, 450),
+                Size = new Size(200, 50),
+                TextAlign = ContentAlignment.MiddleCenter,
+            };
+            createsend1.Click += create_send_1;
+
+            createlabel1 = new Label()
+            {
+                Text = "Впишите фамилию пациента:",
+                Font = new Font("Castellar", 18, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#FFFFFF"),
+                BackColor = Color.Transparent,
+                Location = new Point(50, 210),
+                Size = new Size(400, 50),
+                TextAlign = ContentAlignment.MiddleLeft,
+            };
+
+            createtextbox1 = new TextBox()
+            {
+                Font = new Font("Castellar", 18, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#7a0696"),
+                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Location = new Point(400, 220),
+                Size = new Size(275, 50),
+            };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             // кнопка "Поиск пациента"
             searchPatient = new Button()
@@ -354,6 +498,7 @@ namespace WindowsFormsApp1
                 TextAlign = ContentAlignment.MiddleCenter,
             };
 
+
             // Фоновое изображение
             try
             {
@@ -406,6 +551,22 @@ namespace WindowsFormsApp1
             this.Controls.Add(printPatients); // Добавляем кнопку "Вывести список пациентов"
         }
 
+        private void BackToPatient(object sender, EventArgs e)
+        {
+            this.Controls.Clear();
+            this.Controls.Add(exitButton2); // Добавляем кнопку "Назад"
+            this.Controls.Add(createPatientList); // Добавляем кнопку "Создать список пациентов"
+            this.Controls.Add(searchPatient); // Добавляем кнопку "Поиск пациента"
+            this.Controls.Add(addPatient); // Добавляем кнопку "Добавить пациента"
+            this.Controls.Add(deletePatient); // Добавляем кнопку "Удалить пациента"
+            this.Controls.Add(printPatients);
+
+            //this.Controls.Remove(createsend1);// button
+            //this.Controls.Remove(createlabel1);// label
+            //this.Controls.Remove(createtextbox1);// label
+            //this.Controls.Remove(universalBack);
+        }
+
         // Нажатие кнопки поиск пациента
         private void search(object sender, EventArgs e)
         {
@@ -414,13 +575,57 @@ namespace WindowsFormsApp1
             this.Controls.Remove(addPatient); // Удаляем кнопку "Добавить пациента"
             this.Controls.Remove(deletePatient); // Удаляем кнопку "Удалить пациента"
             this.Controls.Remove(printPatients); // Удаляем кнопку "Вывести список пациентов"
-            this.Controls.Remove(exitButton2);
+            this.Controls.Remove(exitButton2);           
 
-            this.Controls.Add(send);
+            this.Controls.Add(send); 
             this.Controls.Add(exitButton3);
             this.Controls.Add(label_fio);
             this.Controls.Add(textbox_fio);
 
+        }
+
+        private void create(object sender, EventArgs e)
+        {
+            this.Controls.Remove(createPatientList); // Удаляем кнопку "Создать список пациентов"
+            this.Controls.Remove(searchPatient); // Удаляем кнопку "Поиск пациента"
+            this.Controls.Remove(addPatient); // Удаляем кнопку "Добавить пациента"
+            this.Controls.Remove(deletePatient); // Удаляем кнопку "Удалить пациента"
+            this.Controls.Remove(printPatients); // Удаляем кнопку "Вывести список пациентов"
+            this.Controls.Remove(exitButton2);
+
+            this.Controls.Add(createsend1);// button
+            this.Controls.Add(createlabel1);// label
+            this.Controls.Add(createtextbox1);// label
+            this.Controls.Add(universalBack);
+        }
+
+        private void create_send_1(object sender, EventArgs e)
+        {
+            this.Controls.Remove(createlabel1);
+            this.Controls.Remove(createsend1);
+            this.Controls.Remove(createtextbox1);
+
+            
+        }
+
+        // Нажатие кнопки пропуск дня
+        private void time_Actions(object sender, EventArgs e)
+        {
+            this.Controls.Remove(exitButton); // Удаляем кнопку выхода из проги
+            this.Controls.Remove(patientActions); // Удаляем кнопку "Работа с пациентами"
+            this.Controls.Remove(timeActions); // Удаляем кнопку "Работа со временем"
+
+            this.Controls.Add(daysexitButton); // Добавляем кнопку "Назад"
+            this.Controls.Add(senddaysButton); // Добавляем кнопку отправить
+            this.Controls.Add(numberTrackBar);
+            this.Controls.Add(valueLabel);
+            this.Controls.Add(countofdays);
+        }
+
+        private void NumberTrackBar_Scroll(object sender, EventArgs e)
+        {
+            // Обновляем текст метки при изменении значения ползунка
+            valueLabel.Text = "Дни: " + numberTrackBar.Value;
         }
 
         private void send_func(object sender, EventArgs e)
@@ -471,6 +676,19 @@ namespace WindowsFormsApp1
             this.Controls.Remove(send);
             this.Controls.Remove(label_fio);
             this.Controls.Remove(textbox_fio);
+        }
+
+        private void day_Back(object sender, EventArgs e)
+        {
+            this.Controls.Add(exitButton);
+            this.Controls.Add(patientActions);
+            this.Controls.Add(timeActions);
+
+            this.Controls.Remove(daysexitButton);
+            this.Controls.Remove(senddaysButton);
+            this.Controls.Remove(valueLabel);
+            this.Controls.Remove(numberTrackBar);
+            this.Controls.Remove(countofdays);
         }
 
         [STAThread]
