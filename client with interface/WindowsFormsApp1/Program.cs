@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing; // Для работы с изображениями
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-
+using System.IO;
 // класс для считывания hex-кодов
 public class HexToColor
 {
@@ -84,7 +84,7 @@ namespace WindowsFormsApp1
         private Label valueLabel;        // Метка для отображения значения
         private Label countofdays;
 
-        //кнопуи для креатива
+        //кнопки для креатива
         private Button createsend1;
         private Label createlabel1;
         private TextBox createtextbox1;
@@ -137,12 +137,12 @@ namespace WindowsFormsApp1
         private Label name;
 
         // Для списка (тестово)
-
-    
+        public ListBox spisok;
+        
 
         public MainForm()
         {
-
+            
             // Устанавливаем заголовок и размеры окна
             this.Text = "Пример интерфейса с изображением";
             this.Size = new System.Drawing.Size(1000, 600);
@@ -171,6 +171,15 @@ namespace WindowsFormsApp1
                 startButton.BackColor = HexToColor.HexStringToColor("#ffd059");
             }
 
+            spisok = new ListBox()
+            {
+            FormattingEnabled = true,
+            ItemHeight = 20,
+            Location = new System.Drawing.Point(32, 134),
+            Name = "ListPatient",
+            Size = new System.Drawing.Size(733, 304),
+            TabIndex = 4,
+            };
             // Заголовок HOSPITAL BOLNITSA
             name = new Label()
             {
@@ -1001,7 +1010,20 @@ namespace WindowsFormsApp1
             this.Controls.Remove(printPatients); // Удаляем кнопку "Вывести список пациентов"
             this.Controls.Remove(exitButton2);
 
+            this.Controls.Add(spisok);
             this.Controls.Add(universalBack);
+
+            //string str_full_path = Application.ExecutablePath;
+            string str_path = "..\\..\\..\\..\\Hospital Proj\\patients.txt";
+            //string str_path = str_full_path + "\\patients.txt";
+            if (!File.Exists(str_path))
+            {
+                spisok.Items.Add("Файл patients.txt не прочитался или не найден!!!");
+                return;
+            }
+            
+            string[] str = File.ReadAllLines(str_path);
+            spisok.Items.AddRange(str);
 
         }
 
