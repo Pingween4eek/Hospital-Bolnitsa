@@ -17,3 +17,13 @@ D:\нгту\2 курс\hospital прога\new build 7 december\client with inte
 D:\нгту\2 курс\hospital прога\new build 7 december\client with interface\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 D:\нгту\2 курс\hospital прога\new build 7 december\client with interface\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
 D:\нгту\2 курс\hospital прога\new build 7 december\client with interface\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
+C:\Users\pc\Desktop\Hospital-Bolnitsa-main\client with interface\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+C:\Users\pc\Desktop\Hospital-Bolnitsa-main\client with interface\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+C:\Users\pc\Desktop\Hospital-Bolnitsa-main\client with interface\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+C:\Users\pc\Desktop\Hospital-Bolnitsa-main\client with interface\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.AssemblyReference.cache
+C:\Users\pc\Desktop\Hospital-Bolnitsa-main\client with interface\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
+C:\Users\pc\Desktop\Hospital-Bolnitsa-main\client with interface\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+C:\Users\pc\Desktop\Hospital-Bolnitsa-main\client with interface\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
+C:\Users\pc\Desktop\Hospital-Bolnitsa-main\client with interface\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
+C:\Users\pc\Desktop\Hospital-Bolnitsa-main\client with interface\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+C:\Users\pc\Desktop\Hospital-Bolnitsa-main\client with interface\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb

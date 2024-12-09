@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing; // Для работы с изображениями
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -135,8 +136,13 @@ namespace WindowsFormsApp1
         // название проги
         private Label name;
 
+        // Для списка (тестово)
+
+    
+
         public MainForm()
         {
+
             // Устанавливаем заголовок и размеры окна
             this.Text = "Пример интерфейса с изображением";
             this.Size = new System.Drawing.Size(1000, 600);
@@ -309,12 +315,8 @@ namespace WindowsFormsApp1
             universalBack.Click += BackToPatient;
 
 
-
-
-
-
-
             
+
 
 
 
@@ -772,6 +774,7 @@ namespace WindowsFormsApp1
                 Size = new Size(275, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
+            addPatient.Click += add;
 
             // кнопка "Удалить пациента"
             deletePatient = new Button()
@@ -784,6 +787,7 @@ namespace WindowsFormsApp1
                 Size = new Size(275, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
+            deletePatient.Click += delete;
 
             // кнопка "Вывести список пациентов"
             printPatients = new Button()
@@ -796,7 +800,7 @@ namespace WindowsFormsApp1
                 Size = new Size(275, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
-
+            printPatients.Click += print;
 
             // Фоновое изображение
             try
@@ -899,6 +903,28 @@ namespace WindowsFormsApp1
             this.Controls.Add(universalBack);
         }
 
+        private void add(object sender, EventArgs e)
+        {
+            this.Controls.Remove(createPatientList); // Удаляем кнопку "Создать список пациентов"
+            this.Controls.Remove(searchPatient); // Удаляем кнопку "Поиск пациента"
+            this.Controls.Remove(addPatient); // Удаляем кнопку "Добавить пациента"
+            this.Controls.Remove(deletePatient); // Удаляем кнопку "Удалить пациента"
+            this.Controls.Remove(printPatients); // Удаляем кнопку "Вывести список пациентов"
+            this.Controls.Remove(exitButton2);
+
+            this.Controls.Add(universalBack);
+        }
+        private void delete(object sender, EventArgs e)
+        {
+            this.Controls.Remove(createPatientList); // Удаляем кнопку "Создать список пациентов"
+            this.Controls.Remove(searchPatient); // Удаляем кнопку "Поиск пациента"
+            this.Controls.Remove(addPatient); // Удаляем кнопку "Добавить пациента"
+            this.Controls.Remove(deletePatient); // Удаляем кнопку "Удалить пациента"
+            this.Controls.Remove(printPatients); // Удаляем кнопку "Вывести список пациентов"
+            this.Controls.Remove(exitButton2);
+
+            this.Controls.Add(universalBack);
+        }
         private void create_send_1(object sender, EventArgs e)
         {
             string input = this.createtextbox1.Text;
@@ -964,6 +990,19 @@ namespace WindowsFormsApp1
             
 
             
+        }
+
+        private void print(object sender, EventArgs e)
+        {
+            this.Controls.Remove(createPatientList); // Удаляем кнопку "Создать список пациентов"
+            this.Controls.Remove(searchPatient); // Удаляем кнопку "Поиск пациента"
+            this.Controls.Remove(addPatient); // Удаляем кнопку "Добавить пациента"
+            this.Controls.Remove(deletePatient); // Удаляем кнопку "Удалить пациента"
+            this.Controls.Remove(printPatients); // Удаляем кнопку "Вывести список пациентов"
+            this.Controls.Remove(exitButton2);
+
+            this.Controls.Add(universalBack);
+
         }
 
         private void SendPatient(object sender, EventArgs e)
