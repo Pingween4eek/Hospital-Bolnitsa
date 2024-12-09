@@ -87,6 +87,38 @@ namespace WindowsFormsApp1
         private Button createsend1;
         private Label createlabel1;
         private TextBox createtextbox1;
+        private Label errorLabel;
+        private Label numberOfPatients;
+
+        //кнопки для ввода данных пациента
+        private Label patientNumber;
+        private Label patientCounter;
+
+        private Label enterId;
+        private Label enterName;
+        private Label enterSurname;
+        private Label enterGender;
+        private Label enterAge;
+        private Label enterDiagnosis;
+        private Label enterStatus;
+        private Label enterDoctor;
+        private Label enterDepartment;
+        private Label enterDays;
+
+        private Label errorEnterPatient;
+
+        private TextBox enterTextId;
+        private TextBox enterTextName;
+        private TextBox enterTextSurname;
+        private TextBox enterTextGender;
+        private TextBox enterTextAge;
+        private TextBox enterTextDiagnosis;
+        private TextBox enterTextStatus;
+        private TextBox enterTextDoctor;
+        private TextBox enterTextDepartment;
+        private TextBox enterTextDays;
+
+        private Button sendPatientInfo;
 
         //кнопки для работы с поиском
         private Button send;
@@ -141,8 +173,8 @@ namespace WindowsFormsApp1
                 ForeColor = HexToColor.HexStringToColor("#00ffb3"), //цвет текста
                 BackColor = Color.Transparent, //прозрачный фон
                 TextAlign = ContentAlignment.TopCenter, //выравниваем по центру
-                Location = new Point(50, 50), //ставим в точке (50, 50)
-                Size = new Size(900, 150), //рамзер
+                Location = new Point(50, 20), //ставим в точке (50, 50)
+                Size = new Size(900, 110), //рамзер
             };
             this.Controls.Add(name); //добавление на экран
 
@@ -318,9 +350,9 @@ namespace WindowsFormsApp1
 
             createlabel1 = new Label()
             {
-                Text = "Впишите фамилию пациента:",
-                Font = new Font("Castellar", 18, FontStyle.Bold),
-                ForeColor = HexToColor.HexStringToColor("#FFFFFF"),
+                Text = "Впишите количество пациентов:",
+                Font = new Font("Castellar", 16, FontStyle.Bold),
+                ForeColor = Color.Black,
                 BackColor = Color.Transparent,
                 Location = new Point(50, 210),
                 Size = new Size(400, 50),
@@ -330,15 +362,282 @@ namespace WindowsFormsApp1
             createtextbox1 = new TextBox()
             {
                 Font = new Font("Castellar", 18, FontStyle.Bold),
-                ForeColor = HexToColor.HexStringToColor("#7a0696"),
+                ForeColor = Color.White,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
-                Location = new Point(400, 220),
-                Size = new Size(275, 50),
+                Location = new Point(450, 220),
+                Size = new Size(100, 100),
+                TextAlign = HorizontalAlignment.Center,
+            };
+
+            errorLabel = new Label()
+            {
+                Font = new Font("Castellar", 16, FontStyle.Bold),
+                Text = "Некорректный ввод! Введите число от 1 до 100",
+                ForeColor = Color.Red,
+                BackColor = Color.Transparent,
+                Location = new Point(50, 270),
+                Size = new Size(400, 100),
+                TextAlign = ContentAlignment.MiddleLeft,
+            };
+            numberOfPatients = new Label()
+            {
+                Text = "0",
+            };
+
+            patientCounter = new Label()
+            {
+                Text = "1",
             };
 
 
 
 
+
+
+            // окно заполнения данных пациента
+            enterId = new Label()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.Black,
+                BackColor = Color.Transparent,
+                Size = new Size(175, 50),
+                TextAlign = ContentAlignment.TopRight,
+                Text = "Введите Id:",
+                Location = new Point(50, 150)
+            };
+
+            enterTextId = new TextBox()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.White,
+                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Location = new Point(245, 150),
+                Size = new Size(175, 50),
+                TextAlign = HorizontalAlignment.Left,
+            };
+
+            enterName = new Label()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.Black,
+                BackColor = Color.Transparent,
+                Size = new Size(175, 50),
+                TextAlign = ContentAlignment.TopRight,
+                Text = "Введите Имя:",
+                Location = new Point(50, 220)
+            };
+
+            enterTextName = new TextBox()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.White,
+                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Location = new Point(245, 220),
+                Size = new Size(175, 50),
+                TextAlign = HorizontalAlignment.Left,
+            };
+
+            enterSurname = new Label()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.Black,
+                BackColor = Color.Transparent,
+                Size = new Size(175, 50),
+                TextAlign = ContentAlignment.TopRight,
+                Text = "Введите Фамилию:",
+                Location = new Point(50, 290)
+            };
+
+            enterTextSurname = new TextBox()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.White,
+                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Location = new Point(245, 290),
+                Size = new Size(175, 50),
+                TextAlign = HorizontalAlignment.Left,
+            };
+
+            enterGender = new Label()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.Black,
+                BackColor = Color.Transparent,
+                Size = new Size(175, 50),
+                TextAlign = ContentAlignment.TopRight,
+                Text = "Введите Пол:",
+                Location = new Point(50, 360)
+            };
+
+            enterTextGender = new TextBox()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.White,
+                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Location = new Point(245, 360),
+                Size = new Size(175, 50),
+                TextAlign = HorizontalAlignment.Left,
+            };
+
+            enterAge = new Label()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.Black,
+                BackColor = Color.Transparent,
+                Size = new Size(175, 50),
+                TextAlign = ContentAlignment.TopRight,
+                Text = "Введите Возраст:",
+                Location = new Point(50, 430)
+            };
+
+            enterTextAge = new TextBox()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.White,
+                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Location = new Point(245, 430),
+                Size = new Size(175, 50),
+                TextAlign = HorizontalAlignment.Left,
+            };
+
+            enterDiagnosis = new Label()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.Black,
+                BackColor = Color.Transparent,
+                Size = new Size(175, 50),
+                TextAlign = ContentAlignment.TopRight,
+                Text = "Введите Диагноз:",
+                Location = new Point(450, 150)
+            };
+
+            enterTextDiagnosis = new TextBox()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.White,
+                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Location = new Point(645, 150),
+                Size = new Size(175, 50),
+                TextAlign = HorizontalAlignment.Left,
+            };
+
+            enterStatus = new Label()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.Black,
+                BackColor = Color.Transparent,
+                Size = new Size(175, 50),
+                TextAlign = ContentAlignment.TopRight,
+                Text = "Введите Статус:",
+                Location = new Point(450, 220)
+            };
+
+            enterTextStatus = new TextBox()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.White,
+                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Location = new Point(645, 220),
+                Size = new Size(175, 50),
+                TextAlign = HorizontalAlignment.Left,
+            };
+
+            enterDoctor = new Label()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.Black,
+                BackColor = Color.Transparent,
+                Size = new Size(175, 50),
+                TextAlign = ContentAlignment.TopRight,
+                Text = "Введите Врача:",
+                Location = new Point(450, 290)
+            };
+
+            enterTextDoctor = new TextBox()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.White,
+                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Location = new Point(645, 290),
+                Size = new Size(175, 50),
+                TextAlign = HorizontalAlignment.Left,
+            };
+
+            enterDepartment = new Label()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.Black,
+                BackColor = Color.Transparent,
+                Size = new Size(175, 50),
+                TextAlign = ContentAlignment.TopRight,
+                Text = "Введите Отделение:",
+                Location = new Point(450, 360)
+            };
+
+            enterTextDepartment = new TextBox()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.White,
+                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Location = new Point(645, 360),
+                Size = new Size(175, 50),
+                TextAlign = HorizontalAlignment.Left,
+            };
+
+            enterDays = new Label()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.Black,
+                BackColor = Color.Transparent,
+                Size = new Size(175, 50),
+                TextAlign = ContentAlignment.TopRight,
+                Text = "Введите Дни:",
+                Location = new Point(450, 430)
+            };
+
+            enterTextDays = new TextBox()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.White,
+                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Location = new Point(645, 430),
+                Size = new Size(175, 50),
+                TextAlign = HorizontalAlignment.Left,
+            };
+
+            sendPatientInfo = new Button()
+            {
+                Text = "Отправить",
+                Font = new Font("Castellar", 24, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#ad7400"),
+                BackColor = HexToColor.HexStringToColor("#fffa61"),
+                Location = new Point(650, 500),
+                Size = new Size(200, 50),
+                TextAlign = ContentAlignment.MiddleCenter,
+            };
+            this.sendPatientInfo.Click += SendPatient;
+
+            patientNumber = new Label()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.Black,
+                BackColor = Color.Transparent,
+                Size = new Size(175, 50),
+                TextAlign = ContentAlignment.TopRight,
+                Text = "Пациент N1",
+                Location = new Point(350, 100)
+            };
+
+            errorEnterPatient = new Label()
+            {
+                Font = new Font("Castellar", 16, FontStyle.Bold),
+                Text = "",
+                ForeColor = Color.Red,
+                BackColor = Color.Transparent,
+                Location = new Point(50, 450),
+                Size = new Size(350, 100),
+                TextAlign = ContentAlignment.MiddleLeft,
+            };
 
 
 
@@ -456,7 +755,7 @@ namespace WindowsFormsApp1
                 Font = new Font("Castellar", 18, FontStyle.Bold),
                 ForeColor = HexToColor.HexStringToColor("#7a0696"),
                 BackColor = HexToColor.HexStringToColor("#e6a9f5"),
-                Location = new Point(175, 500),
+                Location = new Point(340, 450),
                 Size = new Size(275, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
@@ -560,6 +859,7 @@ namespace WindowsFormsApp1
             this.Controls.Add(addPatient); // Добавляем кнопку "Добавить пациента"
             this.Controls.Add(deletePatient); // Добавляем кнопку "Удалить пациента"
             this.Controls.Add(printPatients);
+            this.Controls.Add(name);
 
             //this.Controls.Remove(createsend1);// button
             //this.Controls.Remove(createlabel1);// label
@@ -578,9 +878,9 @@ namespace WindowsFormsApp1
             this.Controls.Remove(exitButton2);           
 
             this.Controls.Add(send); 
-            this.Controls.Add(exitButton3);
             this.Controls.Add(label_fio);
             this.Controls.Add(textbox_fio);
+            this.Controls.Add(universalBack);
 
         }
 
@@ -601,10 +901,175 @@ namespace WindowsFormsApp1
 
         private void create_send_1(object sender, EventArgs e)
         {
-            this.Controls.Remove(createlabel1);
-            this.Controls.Remove(createsend1);
-            this.Controls.Remove(createtextbox1);
+            string input = this.createtextbox1.Text;
+            if (int.TryParse(input, out int number) )
+            {
+                int num = Convert.ToInt32(input);
+                if (num <= 100 && num > 0)
+                {   
+                    this.numberOfPatients.Text = num.ToString();
+                    this.Controls.Remove(name);
+                    this.Controls.Remove(createlabel1);
+                    this.Controls.Remove(createsend1);
+                    this.Controls.Remove(createtextbox1);
+                    this.Controls.Remove(errorLabel);
 
+                    this.Controls.Add(enterId);
+                    this.Controls.Add(enterTextId);
+
+                    this.Controls.Add(enterName);
+                    this.Controls.Add(enterTextName);
+
+                    this.Controls.Add(enterSurname);
+                    this.Controls.Add(enterTextSurname);
+
+                    this.Controls.Add(enterGender);
+                    this.Controls.Add(enterTextGender);
+
+                    this.Controls.Add(enterAge);
+                    this.Controls.Add(enterTextAge);
+
+                    this.Controls.Add(enterDiagnosis);
+                    this.Controls.Add(enterTextDiagnosis);
+
+                    this.Controls.Add(enterStatus);
+                    this.Controls.Add(enterTextStatus);
+
+                    this.Controls.Add(enterDoctor);
+                    this.Controls.Add(enterTextDoctor);
+
+                    this.Controls.Add(enterDepartment);
+                    this.Controls.Add(enterTextDepartment);
+
+                    this.Controls.Add(enterDays);
+                    this.Controls.Add(enterTextDays);
+
+                    this.Controls.Add(sendPatientInfo);
+                    this.Controls.Add(patientNumber);
+                    this.Controls.Add(name);
+                }
+                else
+                {
+                    this.Controls.Add(errorLabel);
+                    this.createtextbox1.Text = "";
+                }
+            }
+            else
+            {
+                this.Controls.Add(errorLabel);
+                this.createtextbox1.Text = "";
+            }
+              
+
+            
+
+            
+        }
+
+        private void SendPatient(object sender, EventArgs e)
+        {   
+            if (!(int.TryParse(this.enterTextId.Text, out int number)))
+            {
+                this.errorEnterPatient.Text = "ID не является числом!";
+                this.Controls.Add(errorEnterPatient);
+            }
+            else if (Convert.ToInt32(this.enterTextId.Text) > 100 || Convert.ToInt32(this.enterTextId.Text) < 0)
+            {
+                this.errorEnterPatient.Text = "Некорректный ID!";
+                this.Controls.Add(errorEnterPatient);
+            }
+            else if (!(int.TryParse(this.enterTextAge.Text, out int numbe)))
+            {
+                this.errorEnterPatient.Text = "Возраст не является числом!";
+                this.Controls.Add(errorEnterPatient);
+            }
+            else if (Convert.ToInt32(this.enterTextAge.Text) > 120 || Convert.ToInt32(this.enterTextAge.Text) <= 0)
+            {
+                this.errorEnterPatient.Text = "Некорректный Возраст!";
+                this.Controls.Add(errorEnterPatient);
+            }
+            else if (!(int.TryParse(this.enterTextDays.Text, out int numb)))
+            {
+                this.errorEnterPatient.Text = "Кол-во дней не является числом!";
+                this.Controls.Add(errorEnterPatient);
+            }
+            else if (Convert.ToInt32(this.enterTextDays.Text) > 365 || Convert.ToInt32(this.enterTextDays.Text) <= 0)
+            {
+                this.errorEnterPatient.Text = "Некорректное кол-во дней!";
+                this.Controls.Add(errorEnterPatient);
+            }
+            else if (this.enterTextName.Text == "")
+            {
+                this.errorEnterPatient.Text = "Введите имя!";
+                this.Controls.Add(errorEnterPatient);
+            }
+            else if (this.enterTextSurname.Text == "")
+            {
+                this.errorEnterPatient.Text = "Введите фамилию!";
+                this.Controls.Add(errorEnterPatient);
+            }
+            else if (this.enterTextGender.Text == "")
+            {
+                this.errorEnterPatient.Text = "Введите пол!";
+                this.Controls.Add(errorEnterPatient);
+            }
+            else if (this.enterTextDiagnosis.Text == "")
+            {
+                this.errorEnterPatient.Text = "Введите диагноз!";
+                this.Controls.Add(errorEnterPatient);
+            }
+            else if (this.enterTextStatus.Text == "")
+            {
+                this.errorEnterPatient.Text = "Введите статус!";
+                this.Controls.Add(errorEnterPatient);
+            }
+            else if (this.enterTextDoctor.Text == "")
+            {
+                this.errorEnterPatient.Text = "Введите врача!";
+                this.Controls.Add(errorEnterPatient);
+            }
+            else if (this.enterTextDepartment.Text == "")
+            {
+                this.errorEnterPatient.Text = "Введите отделение!";
+                this.Controls.Add(errorEnterPatient);
+            }
+            else
+            {
+                int count = Convert.ToInt32(this.numberOfPatients.Text);
+                if (count == 1)
+                {
+                    this.Controls.Clear();
+
+                    this.Controls.Add(name);
+                    this.Controls.Add(exitButton2); // Добавляем кнопку "Назад"
+                    this.Controls.Add(createPatientList); // Добавляем кнопку "Создать список пациентов"
+                    this.Controls.Add(searchPatient); // Добавляем кнопку "Поиск пациента"
+                    this.Controls.Add(addPatient); // Добавляем кнопку "Добавить пациента"
+                    this.Controls.Add(deletePatient); // Добавляем кнопку "Удалить пациента"
+                    this.Controls.Add(printPatients); // Добавляем кнопку "Вывести список пациентов"
+                }
+                else
+                {
+                    this.Controls.Remove(errorEnterPatient);
+                    this.numberOfPatients.Text = Convert.ToString(count - 1);
+                    this.enterTextId.Text = "";
+                    this.enterTextName.Text = "";
+                    this.enterTextSurname.Text = "";
+                    this.enterTextGender.Text = "";
+                    this.enterTextAge.Text = "";
+                    this.enterTextDiagnosis.Text = "";
+                    this.enterTextStatus.Text = "";
+                    this.enterTextDoctor.Text = "";
+                    this.enterTextDepartment.Text = "";
+                    this.enterTextDays.Text = "";
+
+                    int now_count_0 = Convert.ToInt32(patientCounter.Text) + 1;
+                    this.patientNumber.Text = "Пациент  N" + Convert.ToString(now_count_0);
+
+                    int now_count = Convert.ToInt32(this.patientCounter.Text) + 1;
+                    this.patientCounter.Text = Convert.ToString(now_count);
+                }
+            }
             
         }
 
