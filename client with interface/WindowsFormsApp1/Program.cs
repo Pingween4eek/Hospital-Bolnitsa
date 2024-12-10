@@ -133,6 +133,9 @@ namespace WindowsFormsApp1
         private Label label_name_otvet;
         private Label label_fio_2_otvet;
 
+        //delete
+        private Button send_delete;
+
         // название проги
         private Label name;
 
@@ -766,8 +769,8 @@ namespace WindowsFormsApp1
                 Font = new Font("Castellar", 18, FontStyle.Bold),
                 ForeColor = HexToColor.HexStringToColor("#7a0696"),
                 BackColor = HexToColor.HexStringToColor("#e6a9f5"),
-                Location = new Point(340, 450),
-                Size = new Size(275, 50),
+                Location = new Point(385, 450),
+                Size = new Size(200, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
             send.Click += send_func;
@@ -797,6 +800,19 @@ namespace WindowsFormsApp1
                 TextAlign = ContentAlignment.MiddleCenter,
             };
             deletePatient.Click += delete;
+
+            //кнопка Отправить
+            send_delete = new Button()
+            {
+                Text = "Отправить",
+                Font = new Font("Castellar", 18, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#7a0696"),
+                BackColor = HexToColor.HexStringToColor("#e6a9f5"),
+                Location = new Point(385, 450),
+                Size = new Size(200, 50),
+                TextAlign = ContentAlignment.MiddleCenter,
+            };
+
 
             // кнопка "Вывести список пациентов"
             printPatients = new Button()
@@ -914,6 +930,7 @@ namespace WindowsFormsApp1
 
         private void add(object sender, EventArgs e)
         {
+            this.numberOfPatients.Text = "1";
             this.Controls.Remove(createPatientList); // Удаляем кнопку "Создать список пациентов"
             this.Controls.Remove(searchPatient); // Удаляем кнопку "Поиск пациента"
             this.Controls.Remove(addPatient); // Удаляем кнопку "Добавить пациента"
@@ -921,6 +938,37 @@ namespace WindowsFormsApp1
             this.Controls.Remove(printPatients); // Удаляем кнопку "Вывести список пациентов"
             this.Controls.Remove(exitButton2);
 
+            this.Controls.Add(enterId);
+            this.Controls.Add(enterTextId);
+
+            this.Controls.Add(enterName);
+            this.Controls.Add(enterTextName);
+
+            this.Controls.Add(enterSurname);
+            this.Controls.Add(enterTextSurname);
+
+            this.Controls.Add(enterGender);
+            this.Controls.Add(enterTextGender);
+
+            this.Controls.Add(enterAge);
+            this.Controls.Add(enterTextAge);
+
+            this.Controls.Add(enterDiagnosis);
+            this.Controls.Add(enterTextDiagnosis);
+
+            this.Controls.Add(enterStatus);
+            this.Controls.Add(enterTextStatus);
+
+            this.Controls.Add(enterDoctor);
+            this.Controls.Add(enterTextDoctor);
+
+            this.Controls.Add(enterDepartment);
+            this.Controls.Add(enterTextDepartment);
+
+            this.Controls.Add(enterDays);
+            this.Controls.Add(enterTextDays);
+
+            this.Controls.Add(sendPatientInfo);
             this.Controls.Add(universalBack);
         }
         private void delete(object sender, EventArgs e)
@@ -932,6 +980,9 @@ namespace WindowsFormsApp1
             this.Controls.Remove(printPatients); // Удаляем кнопку "Вывести список пациентов"
             this.Controls.Remove(exitButton2);
 
+            this.Controls.Add(send_delete);
+            this.Controls.Add(label_fio);
+            this.Controls.Add(textbox_fio);
             this.Controls.Add(universalBack);
         }
         private void create_send_1(object sender, EventArgs e)
@@ -948,8 +999,7 @@ namespace WindowsFormsApp1
                     this.Controls.Remove(createsend1);
                     this.Controls.Remove(createtextbox1);
                     this.Controls.Remove(errorLabel);
-
-                    this.Controls.Add(enterId);
+this.Controls.Add(enterId);
                     this.Controls.Add(enterTextId);
 
                     this.Controls.Add(enterName);
@@ -980,6 +1030,7 @@ namespace WindowsFormsApp1
                     this.Controls.Add(enterTextDays);
 
                     this.Controls.Add(sendPatientInfo);
+                    
                     this.Controls.Add(patientNumber);
                     this.Controls.Add(name);
                 }
