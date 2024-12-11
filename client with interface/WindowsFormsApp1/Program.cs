@@ -4,6 +4,8 @@ using System.Drawing; // Для работы с изображениями
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.IO;
+using System.Net.Sockets;
+using System.Text;
 // класс для считывания hex-кодов
 public class HexToColor
 {
@@ -141,7 +143,9 @@ namespace WindowsFormsApp1
 
         // Для списка (тестово)
         public ListBox spisok;
-        
+
+        private static TcpClient client = new TcpClient("127.0.0.1", 8080);
+        private NetworkStream stream = client.GetStream();
 
         public MainForm()
         {
@@ -389,7 +393,7 @@ namespace WindowsFormsApp1
                 Text = "Некорректный ввод! Введите число от 1 до 100",
                 ForeColor = Color.Red,
                 BackColor = Color.Transparent,
-                Location = new Point(50, 270),
+                Location = new Point(20, 270),
                 Size = new Size(400, 100),
                 TextAlign = ContentAlignment.MiddleLeft,
             };
@@ -625,7 +629,7 @@ namespace WindowsFormsApp1
                 Font = new Font("Castellar", 24, FontStyle.Bold),
                 ForeColor = HexToColor.HexStringToColor("#ad7400"),
                 BackColor = HexToColor.HexStringToColor("#fffa61"),
-                Location = new Point(650, 500),
+                Location = new Point(375, 500),
                 Size = new Size(200, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
@@ -844,6 +848,8 @@ namespace WindowsFormsApp1
         private void Exit_Programm(object sender, EventArgs e)
         {
             this.Close();
+            byte[] data = Encoding.ASCII.GetBytes("3");
+            stream.Write(data, 0, data.Length);
         }
 
         private void CenterButton()
@@ -862,6 +868,10 @@ namespace WindowsFormsApp1
 
             this.Controls.Add(patientActions); // Добавляем кнопку "Работа с пациентами"
             this.Controls.Add(timeActions); // Добавляем кнопку "Работа со временем"
+
+            string message = "start";
+            byte[] data = Encoding.ASCII.GetBytes(message);
+            stream.Write(data, 0, data.Length);
         }
 
         // Нажатие кнопки работы с пациентами
@@ -877,6 +887,9 @@ namespace WindowsFormsApp1
             this.Controls.Add(addPatient); // Добавляем кнопку "Добавить пациента"
             this.Controls.Add(deletePatient); // Добавляем кнопку "Удалить пациента"
             this.Controls.Add(printPatients); // Добавляем кнопку "Вывести список пациентов"
+
+            byte[] data = Encoding.ASCII.GetBytes("1");
+            stream.Write(data, 0, data.Length);
         }
 
         private void BackToPatient(object sender, EventArgs e)
@@ -890,6 +903,11 @@ namespace WindowsFormsApp1
             this.Controls.Add(printPatients);
             this.Controls.Add(name);
 
+            byte[] data = Encoding.ASCII.GetBytes("BACK");
+            stream.Write(data, 0, data.Length);
+
+            client = new TcpClient("127.0.0.1", 8080);
+            stream = client.GetStream();
             //this.Controls.Remove(createsend1);// button
             //this.Controls.Remove(createlabel1);// label
             //this.Controls.Remove(createtextbox1);// label
@@ -926,6 +944,9 @@ namespace WindowsFormsApp1
             this.Controls.Add(createlabel1);// label
             this.Controls.Add(createtextbox1);// label
             this.Controls.Add(universalBack);
+
+            byte[] data = Encoding.ASCII.GetBytes("1");
+            stream.Write(data, 0, data.Length);
         }
 
         private void add(object sender, EventArgs e)
@@ -999,7 +1020,9 @@ namespace WindowsFormsApp1
                     this.Controls.Remove(createsend1);
                     this.Controls.Remove(createtextbox1);
                     this.Controls.Remove(errorLabel);
-this.Controls.Add(enterId);
+                    this.Controls.Remove(universalBack);
+
+                    this.Controls.Add(enterId);
                     this.Controls.Add(enterTextId);
 
                     this.Controls.Add(enterName);
@@ -1033,6 +1056,9 @@ this.Controls.Add(enterId);
                     
                     this.Controls.Add(patientNumber);
                     this.Controls.Add(name);
+
+                    byte[] data = Encoding.ASCII.GetBytes(this.createtextbox1.Text);
+                    stream.Write(data, 0, data.Length);
                 }
                 else
                 {
@@ -1152,6 +1178,14 @@ this.Controls.Add(enterId);
                 {
                     this.Controls.Clear();
 
+                    string patient = this.enterTextId.Text + " " + this.enterTextName.Text + " " + this.enterTextSurname.Text + " " + this.enterTextGender.Text + " " + this.enterTextAge.Text + " " + this.enterTextDiagnosis.Text + " " + this.enterTextStatus.Text + " " + this.enterTextDoctor.Text + " " + this.enterTextDepartment.Text + " " + this.enterTextDays.Text;
+
+                    byte[] data = Encoding.ASCII.GetBytes(patient);
+                    stream.Write(data, 0, data.Length);
+
+                    client = new TcpClient("127.0.0.1", 8080);
+                    stream = client.GetStream();
+
                     this.Controls.Add(name);
                     this.Controls.Add(exitButton2); // Добавляем кнопку "Назад"
                     this.Controls.Add(createPatientList); // Добавляем кнопку "Создать список пациентов"
@@ -1164,6 +1198,12 @@ this.Controls.Add(enterId);
                 {
                     this.Controls.Remove(errorEnterPatient);
                     this.numberOfPatients.Text = Convert.ToString(count - 1);
+
+                    string patient = this.enterTextId.Text + " " + this.enterTextName.Text + " " + this.enterTextSurname.Text + " " + this.enterTextGender.Text + " " + this.enterTextAge.Text + " " + this.enterTextDiagnosis.Text + " " + this.enterTextStatus.Text + " " + this.enterTextDoctor.Text + " " + this.enterTextDepartment.Text + " " + this.enterTextDays.Text;
+
+                    byte[] data = Encoding.ASCII.GetBytes(patient);
+                    stream.Write(data, 0, data.Length);
+
                     this.enterTextId.Text = "";
                     this.enterTextName.Text = "";
                     this.enterTextSurname.Text = "";
@@ -1179,7 +1219,7 @@ this.Controls.Add(enterId);
                     this.patientNumber.Text = "Пациент  N" + Convert.ToString(now_count_0);
 
                     int now_count = Convert.ToInt32(this.patientCounter.Text) + 1;
-                    this.patientCounter.Text = Convert.ToString(now_count);
+                    this.patientCounter.Text = Convert.ToString(now_count);                
                 }
             }
             
@@ -1197,6 +1237,9 @@ this.Controls.Add(enterId);
             this.Controls.Add(numberTrackBar);
             this.Controls.Add(valueLabel);
             this.Controls.Add(countofdays);
+
+            byte[] data = Encoding.ASCII.GetBytes("2");
+            stream.Write(data, 0, data.Length);
         }
 
         private void NumberTrackBar_Scroll(object sender, EventArgs e)
@@ -1235,8 +1278,9 @@ this.Controls.Add(enterId);
             this.Controls.Remove(deletePatient);
             this.Controls.Remove(printPatients);
             this.Controls.Remove(send);
-            
 
+            byte[] data = Encoding.ASCII.GetBytes("8");
+            stream.Write(data, 0, data.Length);
         }
         private void Back2(object sender, EventArgs e)
         {
@@ -1266,6 +1310,9 @@ this.Controls.Add(enterId);
             this.Controls.Remove(valueLabel);
             this.Controls.Remove(numberTrackBar);
             this.Controls.Remove(countofdays);
+
+            byte[] data = Encoding.ASCII.GetBytes("BACK");
+            stream.Write(data, 0, data.Length);
         }
 
         [STAThread]
