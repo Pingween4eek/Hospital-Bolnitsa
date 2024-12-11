@@ -3,6 +3,7 @@
 #include <list>
 #include <iostream>
 #include <vector>
+#include <sstream>
 #include "send_message.h"
 #include "receive_message.h"
 #include "socket_wrapper.h"
@@ -10,136 +11,71 @@
 
 using namespace std;
 
+std::vector<std::string> split(const std::string& str) {
+    std::vector<std::string> result;
+    std::istringstream stream(str);
+    std::string word;
+
+    // Читаем слова из строки, разделенные пробелами
+    while (stream >> word) {
+        result.push_back(word);
+    }
+
+    return result;
+}
 
 SocketWrapper& operator>>(SocketWrapper& socket, Patient& pat) {
     std::string input;
 
-    // Запрос ID
-    socket.send("Enter ID: ");
     socket >> input;
 
-    int id;
-    if (std::all_of(input.begin(), input.end(), std::isdigit)) {
-        id = std::stoi(input);
+    std::vector<std::string> words = split(input);
+    for (int i = 0; i < words.size(); i++) {
+        std::cout << words[i] << std::endl;
     }
-    else {
-        id = -1;
-    }
-    while (id < 0) {
-        socket.send("Incorrect ID! Enter ID: ");
-        socket >> input;
+    // Запрос ID
+    //socket.send("Enter ID: ");
+    
 
-        if (std::all_of(input.begin(), input.end(), std::isdigit)) {
-            id = std::stoi(input);
-        }
-        else {
-            id = -1;
-        }
-    }
-    pat._id = id;
+    pat._id = std::stoi(words[0]);
 
     // Запрос имени
-    socket.send("Enter name: ");
-    std::string name;
-
-    socket >> name;
-
-    while (true) {
-        if (std::all_of(name.begin(), name.end(), std::isdigit) && name != "75") {
-            socket.send("Incorrect name! Enter name: ");
-            socket >> name;
-        }
-        else
-            break;
-    }
-
-    pat._name = name;
+    //socket.send("Enter name: ");
+    pat._name = words[1];
     
 
     // Запрос фамилии
-    socket.send("Enter surname: ");
-    std::string surname;
-
-    socket >> surname;
-
-    while (true) {
-        if (std::all_of(surname.begin(), surname.end(), std::isdigit) && surname != "75") {
-            socket.send("Incorrect surname! Enter surname: ");
-            socket >> surname;
-        }
-        else
-            break;
-    }
-
-    pat._surname = surname;
+    //socket.send("Enter surname: ");
+    pat._surname = words[2];
 
     // Запрос пола
-    socket.send("Enter gender: ");
-    socket >> pat._gender;
+    //socket.send("Enter gender: ");
+    pat._gender = words[3];
 
     // Запрос возраста
-    socket.send("Enter age: ");
-    socket >> input;
+    //socket.send("Enter age: ");
 
-    int age;
-    if (std::all_of(input.begin(), input.end(), std::isdigit)) {
-        age = std::stoi(input);
-    }
-    else {
-        age = -1;
-    }
-    while (age < 0 || age > 120) {
-        socket.send("Incorrect age! Enter age: ");
-        socket >> input;
-
-        if (std::all_of(input.begin(), input.end(), std::isdigit)) {
-            age = std::stoi(input);
-        }
-        else {
-            age = -1;
-        }
-    }
-    pat._age = age;
+    pat._age = std::stoi(words[4]);
 
     // Запрос диагноза
-    socket.send("Enter diagnosis: ");
-    socket >> pat._diagnosis;
+    //socket.send("Enter diagnosis: ");
+    pat._diagnosis = words[5];
 
     // Запрос статуса
-    socket.send("Enter status: ");
-    socket >> pat._status;
+    //socket.send("Enter status: ");
+    pat._status = words[6];
 
     // Запрос врача
-    socket.send("Enter doctor: ");
-    socket >> pat._doctor;
+    //socket.send("Enter doctor: ");
+    pat._doctor = words[7];
 
     // Запрос отдела
-    socket.send("Enter department: ");
-    socket >> pat._department;
+    //socket.send("Enter department: ");
+    pat._department = words[8];
 
     // Запрос оставшихся дней
-    socket.send("Remaining days: ");
-    socket >> input;
-
-    int days;
-    if (std::all_of(input.begin(), input.end(), std::isdigit)) {
-        days = std::stoi(input);
-    }
-    else {
-        days = -1;
-    }
-    while (days <= 0 || days > 365) {
-        socket.send("Incorrect days! Enter days: ");
-        socket >> input;
-
-        if (std::all_of(input.begin(), input.end(), std::isdigit)) {
-            days = std::stoi(input);
-        }
-        else {
-            days = -1;
-        }
-    }
-    pat._days = days;
+    //socket.send("Remaining days: ");
+    pat._days = std::stoi(words[9]);
 
     return socket;
 }

@@ -35,6 +35,10 @@ namespace patient_db{
                 return "ERROR001RECEIVE";
             }
 
+            if (nt == "BACK") {
+                return "BACK";
+            }
+
             if (std::all_of(nt.begin(), nt.end(), std::isdigit) && (!nt.empty())) {
                 n = stoi(nt);
             }

@@ -22,6 +22,8 @@ int main() {
 	WSADATA wsaData;
 	SOCKET server_socket;
 	SOCKET client_socket;
+	std::string action;
+	bool action_flag = false;
 	struct sockaddr_in server_addr, client_addr;
 	int client_addr_len = sizeof(client_addr);
 	std::string buffer;  // Используем std::string для буфера
@@ -174,11 +176,16 @@ int main() {
 						switch (key_pat) {
 						case 1:
 
-							if (patient_db::create_patients(&client_socket, &temp) == "ERROR001RECEIVE") {
+							action = patient_db::create_patients(&client_socket, &temp);
+							if (action == "ERROR001RECEIVE") {
 								w = false;
 								moment = false;
 								key = -1;
 								break;
+							}
+							if (action == "BACK") {
+								action_flag = true;
+								//break;
 							}
 							client_socket = accept(server_socket, (struct sockaddr*)&client_addr, &client_addr_len);
 							//Проверка подключения
@@ -189,7 +196,11 @@ int main() {
 								key = -1;
 								break;
 							}
-							patient_db::write_patients(temp);
+							if (action_flag) {
+								action_flag = false;
+							}
+							else
+								patient_db::write_patients(temp);
 
 							break;
 						case 3:
@@ -299,6 +310,9 @@ int main() {
 						closesocket(client_socket);
 						w = false;
 						moment = false;
+						break;
+					}
+					if (number_st == "BACK") {
 						break;
 					}
 					int number = -1;
