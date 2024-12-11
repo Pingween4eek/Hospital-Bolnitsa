@@ -6,7 +6,11 @@ using System.Windows.Forms;
 using System.IO;
 using System.Net.Sockets;
 using System.Text;
+using System.Linq;
 // класс для считывания hex-кодов
+
+
+
 public class HexToColor
 {
 
@@ -134,6 +138,19 @@ namespace WindowsFormsApp1
         private Label label_id_otvet;
         private Label label_name_otvet;
         private Label label_fio_2_otvet;
+        private Label label_no_patient;
+
+        private Label otvet_id;
+        private Label otvet_name;
+        private Label otvet_surname;
+        private Label otvet_gender;
+        private Label otvet_age;
+        private Label otvet_diagnosis;
+        private Label otvet_status;
+        private Label otvet_doctor;
+        private Label otvet_department;
+        private Label otvet_days;
+
 
         //delete
         private Button send_delete;
@@ -420,7 +437,7 @@ namespace WindowsFormsApp1
                 BackColor = Color.Transparent,
                 Size = new Size(175, 50),
                 TextAlign = ContentAlignment.TopRight,
-                Text = "Введите Id:",
+                Text = "Id:",
                 Location = new Point(50, 150)
             };
 
@@ -434,6 +451,16 @@ namespace WindowsFormsApp1
                 TextAlign = HorizontalAlignment.Left,
             };
 
+            otvet_id = new Label()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.Transparent,
+                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Location = new Point(245, 150),
+                Size = new Size(175, 50),
+                TextAlign = ContentAlignment.MiddleLeft,
+            };
+
             enterName = new Label()
             {
                 Font = new Font("Castellar", 14, FontStyle.Bold),
@@ -441,7 +468,7 @@ namespace WindowsFormsApp1
                 BackColor = Color.Transparent,
                 Size = new Size(175, 50),
                 TextAlign = ContentAlignment.TopRight,
-                Text = "Введите Имя:",
+                Text = "Имя:",
                 Location = new Point(50, 220)
             };
 
@@ -455,6 +482,16 @@ namespace WindowsFormsApp1
                 TextAlign = HorizontalAlignment.Left,
             };
 
+            otvet_name = new Label()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.Transparent,
+                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Location = new Point(245, 220),
+                Size = new Size(175, 50),
+                TextAlign = ContentAlignment.MiddleLeft,
+            };
+
             enterSurname = new Label()
             {
                 Font = new Font("Castellar", 14, FontStyle.Bold),
@@ -462,7 +499,7 @@ namespace WindowsFormsApp1
                 BackColor = Color.Transparent,
                 Size = new Size(175, 50),
                 TextAlign = ContentAlignment.TopRight,
-                Text = "Введите Фамилию:",
+                Text = "Фамилия:",
                 Location = new Point(50, 290)
             };
 
@@ -476,6 +513,16 @@ namespace WindowsFormsApp1
                 TextAlign = HorizontalAlignment.Left,
             };
 
+            otvet_surname = new Label()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.Transparent,
+                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Location = new Point(245, 290),
+                Size = new Size(175, 50),
+                TextAlign = ContentAlignment.MiddleLeft,
+            };
+
             enterGender = new Label()
             {
                 Font = new Font("Castellar", 14, FontStyle.Bold),
@@ -483,7 +530,7 @@ namespace WindowsFormsApp1
                 BackColor = Color.Transparent,
                 Size = new Size(175, 50),
                 TextAlign = ContentAlignment.TopRight,
-                Text = "Введите Пол:",
+                Text = "Пол:",
                 Location = new Point(50, 360)
             };
 
@@ -497,6 +544,16 @@ namespace WindowsFormsApp1
                 TextAlign = HorizontalAlignment.Left,
             };
 
+            otvet_gender = new Label()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.Transparent,
+                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Location = new Point(245, 360),
+                Size = new Size(175, 50),
+                TextAlign = ContentAlignment.MiddleLeft,
+            };
+
             enterAge = new Label()
             {
                 Font = new Font("Castellar", 14, FontStyle.Bold),
@@ -504,7 +561,7 @@ namespace WindowsFormsApp1
                 BackColor = Color.Transparent,
                 Size = new Size(175, 50),
                 TextAlign = ContentAlignment.TopRight,
-                Text = "Введите Возраст:",
+                Text = "Возраст:",
                 Location = new Point(50, 430)
             };
 
@@ -518,6 +575,16 @@ namespace WindowsFormsApp1
                 TextAlign = HorizontalAlignment.Left,
             };
 
+            otvet_age = new Label()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.Transparent,
+                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Location = new Point(245, 430),
+                Size = new Size(175, 50),
+                TextAlign = ContentAlignment.MiddleLeft,
+            };
+
             enterDiagnosis = new Label()
             {
                 Font = new Font("Castellar", 14, FontStyle.Bold),
@@ -525,8 +592,18 @@ namespace WindowsFormsApp1
                 BackColor = Color.Transparent,
                 Size = new Size(175, 50),
                 TextAlign = ContentAlignment.TopRight,
-                Text = "Введите Диагноз:",
+                Text = "Диагноз:",
                 Location = new Point(450, 150)
+            };
+
+            otvet_diagnosis = new Label()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.Transparent,
+                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Location = new Point(645, 150),
+                Size = new Size(175, 50),
+                TextAlign = ContentAlignment.MiddleLeft,
             };
 
             enterTextDiagnosis = new TextBox()
@@ -546,7 +623,7 @@ namespace WindowsFormsApp1
                 BackColor = Color.Transparent,
                 Size = new Size(175, 50),
                 TextAlign = ContentAlignment.TopRight,
-                Text = "Введите Статус:",
+                Text = "Статус:",
                 Location = new Point(450, 220)
             };
 
@@ -560,6 +637,16 @@ namespace WindowsFormsApp1
                 TextAlign = HorizontalAlignment.Left,
             };
 
+            otvet_status = new Label()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.Transparent,
+                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Location = new Point(645, 220),
+                Size = new Size(175, 50),
+                TextAlign = ContentAlignment.MiddleLeft,
+            };
+
             enterDoctor = new Label()
             {
                 Font = new Font("Castellar", 14, FontStyle.Bold),
@@ -567,7 +654,7 @@ namespace WindowsFormsApp1
                 BackColor = Color.Transparent,
                 Size = new Size(175, 50),
                 TextAlign = ContentAlignment.TopRight,
-                Text = "Введите Врача:",
+                Text = "Лечащий врач:",
                 Location = new Point(450, 290)
             };
 
@@ -581,6 +668,16 @@ namespace WindowsFormsApp1
                 TextAlign = HorizontalAlignment.Left,
             };
 
+            otvet_doctor = new Label()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.Transparent,
+                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Location = new Point(645, 290),
+                Size = new Size(175, 50),
+                TextAlign = ContentAlignment.MiddleLeft,
+            };
+
             enterDepartment = new Label()
             {
                 Font = new Font("Castellar", 14, FontStyle.Bold),
@@ -588,7 +685,7 @@ namespace WindowsFormsApp1
                 BackColor = Color.Transparent,
                 Size = new Size(175, 50),
                 TextAlign = ContentAlignment.TopRight,
-                Text = "Введите Отделение:",
+                Text = "Отделение:",
                 Location = new Point(450, 360)
             };
 
@@ -602,6 +699,16 @@ namespace WindowsFormsApp1
                 TextAlign = HorizontalAlignment.Left,
             };
 
+            otvet_department = new Label()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.Transparent,
+                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Location = new Point(645, 360),
+                Size = new Size(175, 50),
+                TextAlign = ContentAlignment.MiddleLeft,
+            };
+
             enterDays = new Label()
             {
                 Font = new Font("Castellar", 14, FontStyle.Bold),
@@ -609,7 +716,7 @@ namespace WindowsFormsApp1
                 BackColor = Color.Transparent,
                 Size = new Size(175, 50),
                 TextAlign = ContentAlignment.TopRight,
-                Text = "Введите Дни:",
+                Text = "Оставшиеся Дни:",
                 Location = new Point(450, 430)
             };
 
@@ -621,6 +728,16 @@ namespace WindowsFormsApp1
                 Location = new Point(645, 430),
                 Size = new Size(175, 50),
                 TextAlign = HorizontalAlignment.Left,
+            };
+
+            otvet_days = new Label()
+            {
+                Font = new Font("Castellar", 14, FontStyle.Bold),
+                ForeColor = Color.Transparent,
+                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Location = new Point(645, 430),
+                Size = new Size(175, 50),
+                TextAlign = ContentAlignment.MiddleLeft,
             };
 
             sendPatientInfo = new Button()
@@ -694,7 +811,7 @@ namespace WindowsFormsApp1
             textbox_fio = new TextBox()
             {
                 Font = new Font("Castellar", 18, FontStyle.Bold),
-                ForeColor = HexToColor.HexStringToColor("#7a0696"),
+                ForeColor = Color.White,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
                 Location = new Point(350, 350),
                 Size = new Size(275, 50),
@@ -720,6 +837,17 @@ namespace WindowsFormsApp1
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
                 Location = new Point(150, 290),
                 Size = new Size(275, 50),
+                TextAlign = ContentAlignment.MiddleCenter,
+            };
+
+            label_no_patient = new Label()
+            {
+                Text = "Пациента с данной фамилией не найдено",
+                Font = new Font("Castellar", 18, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#7a0696"),
+                BackColor = HexToColor.HexStringToColor("#e6a9f5"),
+                Location = new Point(290, 200),
+                Size = new Size(400, 100),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
 
@@ -928,6 +1056,9 @@ namespace WindowsFormsApp1
             this.Controls.Add(label_fio);
             this.Controls.Add(textbox_fio);
             this.Controls.Add(universalBack);
+
+            byte[] data = Encoding.ASCII.GetBytes("3");
+            stream.Write(data, 0, data.Length);
 
         }
 
@@ -1193,6 +1324,17 @@ namespace WindowsFormsApp1
                     this.Controls.Add(addPatient); // Добавляем кнопку "Добавить пациента"
                     this.Controls.Add(deletePatient); // Добавляем кнопку "Удалить пациента"
                     this.Controls.Add(printPatients); // Добавляем кнопку "Вывести список пациентов"
+
+                    this.enterTextId.Text = "";
+                    this.enterTextName.Text = "";
+                    this.enterTextSurname.Text = "";
+                    this.enterTextGender.Text = "";
+                    this.enterTextAge.Text = "";
+                    this.enterTextDiagnosis.Text = "";
+                    this.enterTextStatus.Text = "";
+                    this.enterTextDoctor.Text = "";
+                    this.enterTextDepartment.Text = "";
+                    this.enterTextDays.Text = "";
                 }
                 else
                 {
@@ -1255,13 +1397,62 @@ namespace WindowsFormsApp1
             this.Controls.Remove(send);
             this.Controls.Remove(exitButton3);
 
-            this.Controls.Add(exitButton);
-            this.Controls.Add(label_id);
-            this.Controls.Add(label_name);
-            this.Controls.Add(label_fio_2);
-            this.Controls.Add(label_id_otvet);
-            this.Controls.Add(label_name_otvet);
-            this.Controls.Add(label_fio_2_otvet);
+
+            byte[] data = Encoding.ASCII.GetBytes(this.textbox_fio.Text);
+            stream.Write(data, 0, data.Length);
+
+            byte[] bytes = new byte[256];
+            int bytesRead = stream.Read(bytes, 0, bytes.Length);
+            string responseData = Encoding.UTF8.GetString(bytes, 0, bytesRead);
+            responseData = Encoding.UTF8.GetString(bytes, 0, bytesRead);
+
+            if (responseData == "NO PATIENT")
+            {
+                this.Controls.Add(label_no_patient);
+                this.Controls.Add(universalBack);
+            }
+            else
+            {   
+                string[] patient = split(responseData);
+
+                this.otvet_id.Text = patient[0];
+                this.otvet_name.Text = patient[1];
+                this.otvet_surname.Text = patient[2];
+                this.otvet_gender.Text = patient[3];
+                this.otvet_age.Text = patient[4];
+                this.otvet_diagnosis.Text = patient[5];
+                this.otvet_status.Text = patient[6];
+                this.otvet_doctor.Text = patient[7];
+                this.otvet_department.Text = patient[8];
+                this.otvet_days.Text = patient[9];
+
+                this.Controls.Add(exitButton);
+
+                this.Controls.Add(enterId);
+                this.Controls.Add(enterName);
+                this.Controls.Add(enterSurname);
+                this.Controls.Add(enterGender);
+                this.Controls.Add(enterAge);
+                this.Controls.Add(enterDiagnosis);
+                this.Controls.Add(enterStatus);
+                this.Controls.Add(enterDoctor);
+                this.Controls.Add(enterDepartment);
+                this.Controls.Add(enterDays);
+
+                this.Controls.Add(otvet_id);
+                this.Controls.Add(otvet_name);
+                this.Controls.Add(otvet_surname);
+                this.Controls.Add(otvet_gender);
+                this.Controls.Add(otvet_age);
+                this.Controls.Add(otvet_diagnosis);
+                this.Controls.Add(otvet_status);
+                this.Controls.Add(otvet_doctor);
+                this.Controls.Add(otvet_department);
+                this.Controls.Add(otvet_days);
+
+            }
+
+            this.textbox_fio.Text = "";
         }
 
         // Нажатие кнопки назад, тут мы возвращаем убранные и убираем добавленные кнопки в прошлой функции
@@ -1313,6 +1504,16 @@ namespace WindowsFormsApp1
 
             byte[] data = Encoding.ASCII.GetBytes("BACK");
             stream.Write(data, 0, data.Length);
+        }
+
+        private string[] split(string input)
+        {
+
+            string[] result = input
+                .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+                .ToArray();
+
+            return result;
         }
 
         [STAThread]
