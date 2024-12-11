@@ -83,7 +83,7 @@ int main() {
 
 		key = 1;
 		moment = true;
-		sendMessage(&client_socket, "Welcome to the programm! Enter 'start' to continue...");
+		//sendMessage(&client_socket, "Welcome to the programm! Enter 'start' to continue...");
 		std::string start_msg = receiveMessage(client_socket);
 		if (start_msg == "ERROR001RECEIVE") {
 			std::cout << "Client disconnected" << std::endl;
@@ -98,7 +98,7 @@ int main() {
 			moment = true;
 
 			while (moment) {
-				sendMessage(&client_socket, message);
+				//sendMessage(&client_socket, message);
 				std::string key_st = receiveMessage(client_socket);
 				if (key_st == "ERROR001RECEIVE") {
 					std::cout << "Client disconnected" << std::endl;
@@ -114,7 +114,7 @@ int main() {
 						key = stoi(key_st);
 					}
 					else {
-						sendMessage(&client_socket, "Incorrect input! Enter number to choose action: 1-Patient 2-advance time 3-exit programm");
+						//sendMessage(&client_socket, "Incorrect input! Enter number to choose action: 1-Patient 2-advance time 3-exit programm");
 						key_st = receiveMessage(client_socket);
 						if (key_st == "ERROR001RECEIVE") {
 							std::cout << "Client disconnected" << std::endl;
@@ -138,7 +138,7 @@ int main() {
 				{
 					w = true;
 					while (w) {
-						sendMessage(&client_socket, message_2);
+						//sendMessage(&client_socket, message_2);
 						std::string key_pat_st = receiveMessage(client_socket);
 						if (key_pat_st == "ERROR001RECEIVE") {
 							std::cout << "Client disconnected" << std::endl;
@@ -155,7 +155,7 @@ int main() {
 								key_pat = stoi(key_pat_st);
 							}
 							else {
-								sendMessage(&client_socket, "Incorrect input! Enter number to choose action: 1 - Create list of patients, 2 - Add patient to list, 3 - Search patient, 4 - Delete patient, 5 - Print patients, 6 - Exit");
+								//sendMessage(&client_socket, "Incorrect input! Enter number to choose action: 1 - Create list of patients, 2 - Add patient to list, 3 - Search patient, 4 - Delete patient, 5 - Print patients, 6 - Exit");
 								key_pat_st = receiveMessage(client_socket);
 								if (key_pat_st == "ERROR001RECEIVE") {
 									std::cout << "Client disconnected" << std::endl;
@@ -291,7 +291,7 @@ int main() {
 				{
 					if (temp.empty()) {
 						const char* message_3 = "First create list of patients with command 'create'. Print 'ok' to continue";
-						send(client_socket, message_3, strlen(message_3), 0);
+						//send(client_socket, message_3, strlen(message_3), 0);
 						std::string pusto = receiveMessage(client_socket);
 						if (pusto == "ERROR001RECEIVE") {
 							std::cout << "Client disconnected" << std::endl;
@@ -301,8 +301,6 @@ int main() {
 							break;
 						}
 					}
-					else
-						sendMessage(&client_socket, "Enter how many days you want to skip: ");
 
 					std::string number_st = receiveMessage(client_socket);
 					if (number_st == "ERROR001RECEIVE") {
@@ -322,7 +320,7 @@ int main() {
 							number = stoi(number_st);
 						}
 						else {
-							sendMessage(&client_socket, "Incorrect number! Enter how many days you want to skip: ");
+							//sendMessage(&client_socket, "Incorrect number! Enter how many days you want to skip: ");
 							number_st = receiveMessage(client_socket);
 							if (number_st == "ERROR001RECEIVE") {
 								std::cout << "Client disconnected" << std::endl;

@@ -24,58 +24,44 @@ std::vector<std::string> split(const std::string& str) {
     return result;
 }
 
+std::string join(const std::vector<std::string>& words) {
+    std::string result;
+
+    for (size_t i = 0; i < words.size(); ++i) {
+        result += words[i];
+
+        // Добавляем пробел, если это не последний элемент
+        if (i < words.size() - 1) {
+            result += ' ';
+        }
+    }
+
+    return result;
+}
+
 SocketWrapper& operator>>(SocketWrapper& socket, Patient& pat) {
     std::string input;
 
     socket >> input;
 
     std::vector<std::string> words = split(input);
-    for (int i = 0; i < words.size(); i++) {
-        std::cout << words[i] << std::endl;
+
+    if (words.size() == 10) {
+        pat._id = std::stoi(words[0]);
+        pat._name = words[1];
+        pat._surname = words[2];
+        pat._gender = words[3];
+        pat._age = std::stoi(words[4]);
+        pat._diagnosis = words[5];
+        pat._status = words[6];
+        pat._doctor = words[7];
+        pat._department = words[8];
+        pat._days = std::stoi(words[9]);
     }
-    // Запрос ID
-    //socket.send("Enter ID: ");
+    else {
+        pat._days = 75;
+    }
     
-
-    pat._id = std::stoi(words[0]);
-
-    // Запрос имени
-    //socket.send("Enter name: ");
-    pat._name = words[1];
-    
-
-    // Запрос фамилии
-    //socket.send("Enter surname: ");
-    pat._surname = words[2];
-
-    // Запрос пола
-    //socket.send("Enter gender: ");
-    pat._gender = words[3];
-
-    // Запрос возраста
-    //socket.send("Enter age: ");
-
-    pat._age = std::stoi(words[4]);
-
-    // Запрос диагноза
-    //socket.send("Enter diagnosis: ");
-    pat._diagnosis = words[5];
-
-    // Запрос статуса
-    //socket.send("Enter status: ");
-    pat._status = words[6];
-
-    // Запрос врача
-    //socket.send("Enter doctor: ");
-    pat._doctor = words[7];
-
-    // Запрос отдела
-    //socket.send("Enter department: ");
-    pat._department = words[8];
-
-    // Запрос оставшихся дней
-    //socket.send("Remaining days: ");
-    pat._days = std::stoi(words[9]);
 
     return socket;
 }
@@ -96,23 +82,21 @@ istream& operator >>(istream& in, Patient& pat) {
 }
 
 SocketWrapper& operator<<(SocketWrapper& socket, Patient& pat) {
-    std::string id = std::to_string(pat._id);
-    socket << id;
-        
-    socket << pat._name;
-    socket << pat._surname;
-    socket << pat._gender;
+    std::vector<std::string> words;
 
-    std::string age = std::to_string(pat._age);
-    socket << age;
+    words.push_back(std::to_string(pat._id));
+    words.push_back(pat._name);
+    words.push_back(pat._surname);
+    words.push_back(pat._gender);
+    words.push_back(std::to_string(pat._age));
+    words.push_back(pat._diagnosis);
+    words.push_back(pat._status);
+    words.push_back(pat._doctor);
+    words.push_back(pat._department);
+    words.push_back(std::to_string(pat._days));
 
-    socket << pat._diagnosis;
-    socket << pat._status;
-    socket << pat._doctor;
-    socket << pat._department;
-
-    std::string days = std::to_string(pat._days);
-    socket << days;
+    std::string output = join(words);
+    socket << output;
 
     return socket;
 }

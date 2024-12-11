@@ -25,7 +25,7 @@ std::string to_lower(const std::string& str) {
 namespace patient_db{
     std::string create_patients(SOCKET *client_socket, std::vector<Patient>* arr) {
         SocketWrapper client(*client_socket);
-        sendMessage(client_socket, "Enter number of patients = ");
+        //sendMessage(client_socket, "Enter number of patients = ");
         
         int n = -1;
 
@@ -43,13 +43,13 @@ namespace patient_db{
                 n = stoi(nt);
             }
             else {
-                sendMessage(client_socket, "Incorrect number! Enter number of patients = ");
+                //sendMessage(client_socket, "Incorrect number! Enter number of patients = ");
                 n = -1;
             }
         }
         
         if (n <= 0) {
-            sendMessage(client_socket, "CLOSE");
+            //sendMessage(client_socket, "CLOSE");
             closesocket(*client_socket);
             std::cout << "Client connection closed. Waiting for reconnection..." << std::endl;
             return "ok";
@@ -70,7 +70,7 @@ namespace patient_db{
         write_patients(*arr);
 
          // Завершение работы с клиентом, закрываем сокет
-        sendMessage(client_socket, "CLOSE");
+        //sendMessage(client_socket, "CLOSE");
         closesocket(*client_socket);
         std::cout << "Client connection closed. Waiting for reconnection..." << std::endl; //сообщ клиенту о закрытии сокета
         return "ok";
@@ -113,13 +113,13 @@ namespace patient_db{
     std::string add_patient(SOCKET* client_socket, std::vector<Patient>* arr) {
         SocketWrapper client(*client_socket);
         if (arr->empty()) {
-            sendMessage(client_socket, "First create list of patient with command 'create'");
+            //sendMessage(client_socket, "First create list of patient with command 'create'");
             std::string pusto = receiveMessage(*client_socket);
             if (pusto == "ERROR001RECEIVE") {
                 return "ERROR001RECEIVE";
             }
 
-            sendMessage(client_socket, "CLOSE");
+            //sendMessage(client_socket, "CLOSE");
             closesocket(*client_socket);
             std::cout << "Client connection closed. Waiting for reconnection..." << std::endl; //сообщ клиенту о закрытии сокета
 
@@ -134,13 +134,13 @@ namespace patient_db{
         }
 
         arr->push_back(patient);
-        sendMessage(client_socket, "Patient added successfully. Print 'ok' to continue");
+        //sendMessage(client_socket, "Patient added successfully. Print 'ok' to continue");
         std::string pusto = receiveMessage(*client_socket);
         if (pusto == "ERROR001RECEIVE") {
             return "ERROR001RECEIVE";
         }
 
-        sendMessage(client_socket, "CLOSE");
+        //sendMessage(client_socket, "CLOSE");
         closesocket(*client_socket);
         std::cout << "Client connection closed. Waiting for reconnection..." << std::endl; //сообщ клиенту о закрытии сокета
 
@@ -152,20 +152,20 @@ namespace patient_db{
         SocketWrapper client(*client_socket);
 
         if (arr->empty()) {
-            sendMessage(client_socket, "List of patients doesnt exist");
+            //sendMessage(client_socket, "List of patients doesnt exist");
             std::string pusto = receiveMessage(*client_socket);
             if (pusto == "ERROR001RECEIVE") {
                 return "ERROR001RECEIVE";
             }
 
-            sendMessage(client_socket, "CLOSE");
+            //sendMessage(client_socket, "CLOSE");
             closesocket(*client_socket);
             std::cout << "Client connection closed. Waiting for reconnection..." << std::endl; //сообщ клиенту о закрытии сокета
 
             return "ok";
         }
 
-        sendMessage(client_socket, "Enter the surname of patient you want to delete: ");
+        //sendMessage(client_socket, "Enter the surname of patient you want to delete: ");
         std::string patient = receiveMessage(*client_socket);
         if (patient == "ERROR001RECEIVE") {
             return "ERROR001RECEIVE";
@@ -183,7 +183,7 @@ namespace patient_db{
             }
         }
         if (flag) {
-            sendMessage(client_socket, "Patient was delete, enter 'ok' to continue");
+            //sendMessage(client_socket, "Patient was delete, enter 'ok' to continue");
             arr->erase(arr->begin() + id);
             std::string pusto = receiveMessage(*client_socket);
             if (pusto == "ERROR001RECEIVE") {
@@ -192,18 +192,18 @@ namespace patient_db{
         }
 
         else {
-            sendMessage(client_socket, "This patient doesn't exist, enter 'ok' to continue");
+            //sendMessage(client_socket, "This patient doesn't exist, enter 'ok' to continue");
             std::string pusto = receiveMessage(*client_socket);
             if (pusto == "ERROR001RECEIVE") {
                 return "ERROR001RECEIVE";
             }
 
-            sendMessage(client_socket, "CLOSE");
+            //sendMessage(client_socket, "CLOSE");
             closesocket(*client_socket);
             std::cout << "Client connection closed. Waiting for reconnection..." << std::endl; //сообщ клиенту о закрытии сокета
             return "ok";
         }
-        sendMessage(client_socket, "CLOSE");
+        //sendMessage(client_socket, "CLOSE");
         closesocket(*client_socket);
         std::cout << "Client connection closed. Waiting for reconnection..." << std::endl; //сообщ клиенту о закрытии сокета
         return "ok";
@@ -213,23 +213,27 @@ namespace patient_db{
         SocketWrapper client(*client_socket);
 
         if (arr.empty()) {
-            sendMessage(client_socket, "First create list of patients with command 'create' Print 'ok' to continue");
+            //sendMessage(client_socket, "First create list of patients with command 'create' Print 'ok' to continue");
             std::string pusto = receiveMessage(*client_socket);
             if (pusto == "ERROR001RECEIVE") {
                 return "ERROR001RECEIVE";
             }
 
-            sendMessage(client_socket, "CLOSE");
+            //sendMessage(client_socket, "CLOSE");
             closesocket(*client_socket);
             std::cout << "Client connection closed. Waiting for reconnection..." << std::endl; //сообщ клиенту о закрытии сокета
 
             return "ok";
         }
     
-        sendMessage(client_socket, "What patient you looking for? (Enter surname): ");
+        //sendMessage(client_socket, "What patient you looking for? (Enter surname): ");
         std::string patient = receiveMessage(*client_socket);
         if (patient == "ERROR001RECEIVE") {
             return "ERROR001RECEIVE";
+        }
+
+        if (patient == "BACK") {
+            return "BACK";
         }
 
         patient = to_lower(patient);
@@ -244,7 +248,7 @@ namespace patient_db{
             }
         }
         if (flag) {
-            sendMessage(client_socket, "PATIENT");
+            //sendMessage(client_socket, "PATIENT");
             std::cout << arr[id];
             client << arr[id];
             std::string pusto = receiveMessage(*client_socket);
@@ -254,13 +258,14 @@ namespace patient_db{
         }
         else {
             std::cout << "There are no matches" << std::endl;
-            sendMessage(client_socket, "CLOSE");
+            sendMessage(client_socket, "NO PATIENT");
+            //sendMessage(client_socket, "CLOSE");
             closesocket(*client_socket);
             std::cout << "Client connection closed. Waiting for reconnection..." << std::endl; //сообщ клиенту о закрытии сокета
 
             return "ok";
         }
-        sendMessage(client_socket, "CLOSE");
+        //sendMessage(client_socket, "CLOSE");
         closesocket(*client_socket);
         std::cout << "Client connection closed. Waiting for reconnection..." << std::endl; //сообщ клиенту о закрытии сокета
         return "ok";
@@ -268,13 +273,13 @@ namespace patient_db{
 
     std::string print_patients(SOCKET* client_socket, std::vector<Patient> arr) {
         if (arr.empty()) {
-            sendMessage(client_socket, "First create list of patients with command 'create' Print 'ok' to continue");
+            //sendMessage(client_socket, "First create list of patients with command 'create' Print 'ok' to continue");
             std::string pusto = receiveMessage(*client_socket);
             if (pusto == "ERROR001RECEIVE") {
                 return "ERROR001RECEIVE";
             }
 
-            sendMessage(client_socket, "CLOSE");
+            //sendMessage(client_socket, "CLOSE");
             closesocket(*client_socket);
             std::cout << "Client connection closed. Waiting for reconnection..." << std::endl; //сообщ клиенту о закрытии сокета
 
@@ -284,7 +289,7 @@ namespace patient_db{
         SocketWrapper client(*client_socket);
         int n = arr.size();
         for (int i = 0; i < n; i++) {
-            sendMessage(client_socket, "PATIENT");
+            //sendMessage(client_socket, "PATIENT");
             std::cout << arr[i];
             client << arr[i];
             std::string pusto = receiveMessage(*client_socket);
@@ -293,7 +298,7 @@ namespace patient_db{
             }
         }
 
-        sendMessage(client_socket, "CLOSE");
+        //sendMessage(client_socket, "CLOSE");
         closesocket(*client_socket);
         std::cout << "Client connection closed. Waiting for reconnection..." << std::endl; //сообщ клиенту о закрытии сокета
         return "ok";
