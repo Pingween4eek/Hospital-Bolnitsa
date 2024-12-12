@@ -44,6 +44,11 @@ SocketWrapper& operator>>(SocketWrapper& socket, Patient& pat) {
 
     socket >> input;
 
+    if (input == "BACK") {
+        pat._days = 74;
+        return socket;
+    }
+
     std::vector<std::string> words = split(input);
 
     if (words.size() == 10) {

@@ -256,7 +256,10 @@ int main() {
 
 						case 4:
 							patient_db::read_patients(&temp);
-							if (patient_db::delete_patient(&client_socket, &temp) == "ERROR001RECEIVE") {
+
+							action = patient_db::delete_patient(&client_socket, &temp);
+
+							if (action == "ERROR001RECEIVE") {
 								w = false;
 								moment = false;
 								key = -1;
@@ -270,7 +273,15 @@ int main() {
 								WSACleanup();
 								return 1;
 							}
-							patient_db::write_patients(temp);
+							if (action == "BACK") {
+								action_flag = true;
+							}
+
+							if (action_flag) {
+								action_flag = false;
+							}
+							else
+								patient_db::write_patients(temp);
 
 							break;
 						case 5:

@@ -129,8 +129,13 @@ namespace patient_db{
         Patient patient;
         client >> patient;
 
+
         if (patient.getDays() == 75) {
             return "ERROR001RECEIVE";
+        }
+
+        if (patient.getDays() == 74) {
+            return "BACK";
         }
 
         arr->push_back(patient);
@@ -185,6 +190,7 @@ namespace patient_db{
         if (flag) {
             //sendMessage(client_socket, "Patient was delete, enter 'ok' to continue");
             arr->erase(arr->begin() + id);
+            sendMessage(client_socket, "YES");
             std::string pusto = receiveMessage(*client_socket);
             if (pusto == "ERROR001RECEIVE") {
                 return "ERROR001RECEIVE";
@@ -193,6 +199,7 @@ namespace patient_db{
 
         else {
             //sendMessage(client_socket, "This patient doesn't exist, enter 'ok' to continue");
+            sendMessage(client_socket, "NO");
             std::string pusto = receiveMessage(*client_socket);
             if (pusto == "ERROR001RECEIVE") {
                 return "ERROR001RECEIVE";
