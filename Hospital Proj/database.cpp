@@ -175,6 +175,9 @@ namespace patient_db{
         if (patient == "ERROR001RECEIVE") {
             return "ERROR001RECEIVE";
         }
+        if (patient == "BACK") {
+            return "BACK";
+        }
 
         int id;
         int n = arr->size();
