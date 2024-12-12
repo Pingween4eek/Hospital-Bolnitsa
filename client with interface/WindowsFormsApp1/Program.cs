@@ -746,7 +746,7 @@ namespace WindowsFormsApp1
                 Font = new Font("Castellar", 24, FontStyle.Bold),
                 ForeColor = HexToColor.HexStringToColor("#ad7400"),
                 BackColor = HexToColor.HexStringToColor("#fffa61"),
-                Location = new Point(375, 500),
+                Location = new Point(700, 500),
                 Size = new Size(200, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
@@ -1122,6 +1122,9 @@ namespace WindowsFormsApp1
 
             this.Controls.Add(sendPatientInfo);
             this.Controls.Add(universalBack);
+
+            byte[] data = Encoding.ASCII.GetBytes("2");
+            stream.Write(data, 0, data.Length);
         }
         private void delete(object sender, EventArgs e)
         {
