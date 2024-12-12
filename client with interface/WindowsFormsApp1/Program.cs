@@ -850,6 +850,7 @@ namespace WindowsFormsApp1
                 Size = new Size(400, 100),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
+            
 
             label_fio_2 = new Label()
             {
@@ -944,6 +945,7 @@ namespace WindowsFormsApp1
                 Size = new Size(200, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
+            send_delete.Click += sendDelete;
 
 
             // кнопка "Вывести список пациентов"
@@ -1040,6 +1042,7 @@ namespace WindowsFormsApp1
             //this.Controls.Remove(createlabel1);// label
             //this.Controls.Remove(createtextbox1);// label
             //this.Controls.Remove(universalBack);
+            this.label_no_patient.Text = "Пациента с данной фамилией не найдено";
         }
 
         // Нажатие кнопки поиск пациента
@@ -1139,6 +1142,9 @@ namespace WindowsFormsApp1
             this.Controls.Add(label_fio);
             this.Controls.Add(textbox_fio);
             this.Controls.Add(universalBack);
+
+            byte[] data = Encoding.ASCII.GetBytes("4");
+            stream.Write(data, 0, data.Length);
         }
         private void create_send_1(object sender, EventArgs e)
         {
@@ -1368,6 +1374,34 @@ namespace WindowsFormsApp1
                 }
             }
             
+        }
+
+        private void sendDelete(object sender, EventArgs e)
+        {
+            this.Controls.Remove(send_delete);
+            this.Controls.Remove(label_fio);
+            this.Controls.Remove(textbox_fio);
+
+            byte[] data = Encoding.ASCII.GetBytes(textbox_fio.Text);
+            stream.Write(data, 0, data.Length);
+
+            this.textbox_fio.Text = "";
+
+            byte[] bytes = new byte[256];
+            int bytesRead = stream.Read(bytes, 0, bytes.Length);
+            string responseData = Encoding.UTF8.GetString(bytes, 0, bytesRead);
+            responseData = Encoding.UTF8.GetString(bytes, 0, bytesRead);
+
+            if (responseData == "YES")
+            {
+                this.label_no_patient.Text = "Пациент удален успешно";
+                this.Controls.Add(label_no_patient);
+            }
+            if (responseData == "NO")
+            {
+                this.label_no_patient.Text = "Такой пациент не найден";
+                this.Controls.Add(label_no_patient);
+            }
         }
 
         // Нажатие кнопки пропуск дня
