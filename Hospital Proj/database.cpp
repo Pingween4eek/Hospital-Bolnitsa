@@ -135,10 +135,10 @@ namespace patient_db{
 
         arr->push_back(patient);
         //sendMessage(client_socket, "Patient added successfully. Print 'ok' to continue");
-        std::string pusto = receiveMessage(*client_socket);
-        if (pusto == "ERROR001RECEIVE") {
-            return "ERROR001RECEIVE";
-        }
+        //std::string pusto = receiveMessage(*client_socket);
+        //if (pusto == "ERROR001RECEIVE") {
+            //return "ERROR001RECEIVE";
+        //}
 
         //sendMessage(client_socket, "CLOSE");
         closesocket(*client_socket);
