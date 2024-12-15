@@ -174,20 +174,21 @@ namespace WindowsFormsApp1
             this.MaximumSize = new System.Drawing.Size(1000, 600);
 
             startButton = new Button();
-            startButton.Location = new System.Drawing.Point(350, 250);
+            startButton.Location = new System.Drawing.Point(340, 250);
             startButton.Width = 300;
             startButton.Height = 50;
             this.Controls.Add(startButton);
             startButton.Text = "START";
-            startButton.Font = new Font("Comic sans", 25, FontStyle.Bold);
+            startButton.Font = new Font("Century", 25, FontStyle.Bold);
             startButton.Click += Start_Programm;
+            startButton.ForeColor = Color.White;   
             //startButton.BackColor = System.Drawing.Color.Red;
 
             this.Resize += (sender, e) => CenterButton();
 
             try
             {
-                startButton.BackgroundImage = Image.FromFile("C:/Users/Ivan/source/repos/WindowsFormsApp1/WindowsFormsApp1/picure.png"); // Путь к изображению
+                startButton.BackgroundImage = Image.FromFile("..\\..\\..\\..\\client with interface\\WindowsFormsApp1\\button.png"); // Путь к изображению
                 startButton.BackgroundImageLayout = ImageLayout.Stretch; // Растянуть изображение по кнопке
             }
             catch (Exception ex)
@@ -208,8 +209,8 @@ namespace WindowsFormsApp1
             name = new Label()
             {
                 Text = "HOSPITAL BOLNITSA",
-                Font = new Font("Castellar", 52, FontStyle.Bold), //шрифт
-                ForeColor = HexToColor.HexStringToColor("#00ffb3"), //цвет текста
+                Font = new Font("Century", 52, FontStyle.Bold), //шрифт
+                ForeColor = Color.White, //цвет текста
                 BackColor = Color.Transparent, //прозрачный фон
                 TextAlign = ContentAlignment.TopCenter, //выравниваем по центру
                 Location = new Point(50, 20), //ставим в точке (50, 50)
@@ -220,10 +221,10 @@ namespace WindowsFormsApp1
             // кнопка выхода из проги
             exitButton = new Button()
             {
-                Text = "Выход",
-                Font = new Font("Castellar", 24, FontStyle.Bold),
-                ForeColor = HexToColor.HexStringToColor("#2e2e2e"),
-                BackColor = HexToColor.HexStringToColor("#c23838"),
+                Text = "ВЫХОД",
+                Font = new Font("Century", 24, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#138fff"),
+                BackColor = Color.White,
                 Location = new Point(385, 500),
                 Size = new Size(200, 50),
             };
@@ -233,10 +234,10 @@ namespace WindowsFormsApp1
             // кнопка, возвращающая на экран выбора действия
             exitButton2 = new Button()
             {
-                Text = "Назад",
-                Font = new Font("Castellar", 24, FontStyle.Bold),
-                ForeColor = HexToColor.HexStringToColor("#2e2e2e"),
-                BackColor = HexToColor.HexStringToColor("#c23838"),
+                Text = "НАЗАД",
+                Font = new Font("Century", 24, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#138fff"),
+                BackColor = Color.White,
                 Location = new Point(385, 500),
                 Size = new Size(200, 50),
             };
@@ -244,10 +245,10 @@ namespace WindowsFormsApp1
 
             exitButton3 = new Button()
             {
-                Text = "Назад",
-                Font = new Font("Castellar", 24, FontStyle.Bold),
-                ForeColor = HexToColor.HexStringToColor("#2e2e2e"),
-                BackColor = HexToColor.HexStringToColor("#c23838"),
+                Text = "НАЗАД",
+                Font = new Font("Century", 24, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#138fff"),
+                BackColor = Color.White,
                 Location = new Point(525, 500),
                 Size = new Size(200, 50),
             };
@@ -257,19 +258,27 @@ namespace WindowsFormsApp1
             patientActions = new Button()
             {
                 Text = "Работа с пациентами",
-                Font = new Font("Castellar", 24, FontStyle.Bold),
-                ForeColor = HexToColor.HexStringToColor("#2c29ff"),
-                BackColor = HexToColor.HexStringToColor("#69a0c7"),
+                Font = new Font("Century", 24, FontStyle.Bold),
+                ForeColor = Color.White,
                 Location = new Point(100, 250),
                 Size = new Size(375, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
+            try
+            {
+                patientActions.BackgroundImage = Image.FromFile("..\\..\\..\\..\\client with interface\\WindowsFormsApp1\\button.png"); // Путь к изображению
+                patientActions.BackgroundImageLayout = ImageLayout.Stretch; // Растянуть изображение по кнопке
+            }
+            catch (Exception ex)
+            {
+                patientActions.BackColor = HexToColor.HexStringToColor("#69a0c7");
+            }
             patientActions.Click += Patient_Actions; // функция, удаляющая элементы экрана "Выбор действия" и добавляющая элементы экрана "Работа с пациентами"
 
             daysexitButton = new Button()
             {
                 Text = "Назад",
-                Font = new Font("Castellar", 24, FontStyle.Bold),
+                Font = new Font("Century", 24, FontStyle.Bold),
                 ForeColor = HexToColor.HexStringToColor("#2e2e2e"),
                 BackColor = HexToColor.HexStringToColor("#c23838"),
                 Location = new Point(385, 500),
@@ -281,26 +290,43 @@ namespace WindowsFormsApp1
             timeActions = new Button()
             {
                 Text = "Промотать время",
-                Font = new Font("Castellar", 24, FontStyle.Bold),
-                ForeColor = HexToColor.HexStringToColor("#0a6925"),
+                Font = new Font("Century", 24, FontStyle.Bold),
+                ForeColor = Color.White,
                 BackColor = HexToColor.HexStringToColor("#75e093"),
                 Location = new Point(500, 250),
                 Size = new Size(375, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
+            try
+            {
+                timeActions.BackgroundImage = Image.FromFile("..\\..\\..\\..\\client with interface\\WindowsFormsApp1\\button.png"); // Путь к изображению
+                timeActions.BackgroundImageLayout = ImageLayout.Stretch; // Растянуть изображение по кнопке
+            }
+            catch (Exception ex)
+            {
+                timeActions.BackColor = HexToColor.HexStringToColor("#75e093");
+            }
             timeActions.Click += time_Actions;
 
             // кнопка отправления кол-ва дней
             senddaysButton = new Button()
             {
                 Text = "Отправить",
-                Font = new Font("Castellar", 24, FontStyle.Bold),
-                ForeColor = HexToColor.HexStringToColor("#ad7400"),
-                BackColor = HexToColor.HexStringToColor("#fffa61"),
+                Font = new Font("Century", 20, FontStyle.Bold),
+                ForeColor = Color.White,
                 Location = new Point(385, 450),
                 Size = new Size(200, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
+            try
+            {
+                senddaysButton.BackgroundImage = Image.FromFile("..\\..\\..\\..\\client with interface\\WindowsFormsApp1\\button.png"); // Путь к изображению
+                senddaysButton.BackgroundImageLayout = ImageLayout.Stretch; // Растянуть изображение по кнопке
+            }
+            catch (Exception ex)
+            {
+                senddaysButton.BackColor = HexToColor.HexStringToColor("#fffa61");
+            }
             senddaysButton.Click += daySend;
 
             //ползунок
@@ -318,9 +344,9 @@ namespace WindowsFormsApp1
             valueLabel = new Label()
             {
                 Text = "Дни: ",
-                Font = new Font("Castellar", 18, FontStyle.Bold),
-                ForeColor = HexToColor.HexStringToColor("#FFFFFF"),
-                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Font = new Font("Century", 18, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#138fff"),
+                BackColor = Color.Transparent,
                 Location = new Point(680, 270),
                 Size = new Size(275, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
@@ -329,8 +355,8 @@ namespace WindowsFormsApp1
             countofdays = new Label()
             {
                 Text = "Выберите количество дней.",
-                Font = new Font("Castellar", 18, FontStyle.Bold),
-                ForeColor = HexToColor.HexStringToColor("#FFFFFF"),
+                Font = new Font("Century", 18, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#138fff"),
                 BackColor = Color.Transparent,
                 Location = new Point(150, 230),
                 Size = new Size(400, 50),
@@ -339,10 +365,10 @@ namespace WindowsFormsApp1
 
             universalBack = new Button()
             {
-                Text = "Назад",
-                Font = new Font("Castellar", 24, FontStyle.Bold),
-                ForeColor = HexToColor.HexStringToColor("#2e2e2e"),
-                BackColor = HexToColor.HexStringToColor("#c23838"),
+                Text = "НАЗАД",
+                Font = new Font("Century", 24, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#138fff"),
+                BackColor = Color.White,
                 Location = new Point(385, 500),
                 Size = new Size(200, 50),
             };
@@ -362,33 +388,49 @@ namespace WindowsFormsApp1
             createPatientList = new Button()
             {
                 Text = "Создать список пациентов",
-                Font = new Font("Castellar", 14, FontStyle.Bold),
-                ForeColor = HexToColor.HexStringToColor("#ad7400"),
-                BackColor = HexToColor.HexStringToColor("#fffa61"),
+                Font = new Font("Century", 12, FontStyle.Bold),
+                ForeColor = Color.White,
                 Location = new Point(50, 200),
                 Size = new Size(275, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
+            try
+            {
+                createPatientList.BackgroundImage = Image.FromFile("..\\..\\..\\..\\client with interface\\WindowsFormsApp1\\button.png"); // Путь к изображению
+                createPatientList.BackgroundImageLayout = ImageLayout.Stretch; // Растянуть изображение по кнопке
+            }
+            catch (Exception ex)
+            {
+                createPatientList.BackColor = HexToColor.HexStringToColor("#fffa61");
+            }
             createPatientList.Click += create;
 
             //отправить кол-во пациентов
             createsend1 = new Button()
             {
                 Text = "Отправить",
-                Font = new Font("Castellar", 24, FontStyle.Bold),
-                ForeColor = HexToColor.HexStringToColor("#ad7400"),
-                BackColor = HexToColor.HexStringToColor("#fffa61"),
+                Font = new Font("Century", 20, FontStyle.Bold),
+                ForeColor = Color.White,
                 Location = new Point(385, 450),
                 Size = new Size(200, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
+            try
+            {
+                createsend1.BackgroundImage = Image.FromFile("..\\..\\..\\..\\client with interface\\WindowsFormsApp1\\button.png"); // Путь к изображению
+                createsend1.BackgroundImageLayout = ImageLayout.Stretch; // Растянуть изображение по кнопке
+            }
+            catch (Exception ex)
+            {
+                createsend1.BackColor = HexToColor.HexStringToColor("#fffa61");
+            }
             createsend1.Click += create_send_1;
 
             createlabel1 = new Label()
             {
                 Text = "Впишите количество пациентов:",
-                Font = new Font("Castellar", 16, FontStyle.Bold),
-                ForeColor = Color.Black,
+                Font = new Font("Century", 16, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#138fff"),
                 BackColor = Color.Transparent,
                 Location = new Point(50, 210),
                 Size = new Size(400, 50),
@@ -397,7 +439,7 @@ namespace WindowsFormsApp1
 
             createtextbox1 = new TextBox()
             {
-                Font = new Font("Castellar", 18, FontStyle.Bold),
+                Font = new Font("Century", 18, FontStyle.Bold),
                 ForeColor = Color.White,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
                 Location = new Point(450, 220),
@@ -407,7 +449,7 @@ namespace WindowsFormsApp1
 
             errorLabel = new Label()
             {
-                Font = new Font("Castellar", 16, FontStyle.Bold),
+                Font = new Font("Century", 16, FontStyle.Bold),
                 Text = "Некорректный ввод! Введите число от 1 до 100",
                 ForeColor = Color.Red,
                 BackColor = Color.Transparent,
@@ -433,8 +475,8 @@ namespace WindowsFormsApp1
             // окно заполнения данных пациента
             enterId = new Label()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
-                ForeColor = Color.Black,
+                Font = new Font("Century", 14, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#138fff"),
                 BackColor = Color.Transparent,
                 Size = new Size(175, 50),
                 TextAlign = ContentAlignment.TopRight,
@@ -444,7 +486,7 @@ namespace WindowsFormsApp1
 
             enterTextId = new TextBox()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
+                Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.White,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
                 Location = new Point(245, 150),
@@ -454,7 +496,7 @@ namespace WindowsFormsApp1
 
             otvet_id = new Label()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
+                Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.Transparent,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
                 Location = new Point(245, 150),
@@ -464,8 +506,8 @@ namespace WindowsFormsApp1
 
             enterName = new Label()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
-                ForeColor = Color.Black,
+                Font = new Font("Century", 14, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#138fff"),
                 BackColor = Color.Transparent,
                 Size = new Size(175, 50),
                 TextAlign = ContentAlignment.TopRight,
@@ -475,7 +517,7 @@ namespace WindowsFormsApp1
 
             enterTextName = new TextBox()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
+                Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.White,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
                 Location = new Point(245, 220),
@@ -485,7 +527,7 @@ namespace WindowsFormsApp1
 
             otvet_name = new Label()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
+                Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.Transparent,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
                 Location = new Point(245, 220),
@@ -495,8 +537,8 @@ namespace WindowsFormsApp1
 
             enterSurname = new Label()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
-                ForeColor = Color.Black,
+                Font = new Font("Century", 14, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#138fff"),
                 BackColor = Color.Transparent,
                 Size = new Size(175, 50),
                 TextAlign = ContentAlignment.TopRight,
@@ -506,7 +548,7 @@ namespace WindowsFormsApp1
 
             enterTextSurname = new TextBox()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
+                Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.White,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
                 Location = new Point(245, 290),
@@ -516,7 +558,7 @@ namespace WindowsFormsApp1
 
             otvet_surname = new Label()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
+                Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.Transparent,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
                 Location = new Point(245, 290),
@@ -526,8 +568,8 @@ namespace WindowsFormsApp1
 
             enterGender = new Label()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
-                ForeColor = Color.Black,
+                Font = new Font("Century", 14, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#138fff"),
                 BackColor = Color.Transparent,
                 Size = new Size(175, 50),
                 TextAlign = ContentAlignment.TopRight,
@@ -537,7 +579,7 @@ namespace WindowsFormsApp1
 
             enterTextGender = new TextBox()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
+                Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.White,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
                 Location = new Point(245, 360),
@@ -547,7 +589,7 @@ namespace WindowsFormsApp1
 
             otvet_gender = new Label()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
+                Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.Transparent,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
                 Location = new Point(245, 360),
@@ -557,8 +599,8 @@ namespace WindowsFormsApp1
 
             enterAge = new Label()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
-                ForeColor = Color.Black,
+                Font = new Font("Century", 14, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#138fff"),
                 BackColor = Color.Transparent,
                 Size = new Size(175, 50),
                 TextAlign = ContentAlignment.TopRight,
@@ -568,7 +610,7 @@ namespace WindowsFormsApp1
 
             enterTextAge = new TextBox()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
+                Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.White,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
                 Location = new Point(245, 430),
@@ -578,7 +620,7 @@ namespace WindowsFormsApp1
 
             otvet_age = new Label()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
+                Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.Transparent,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
                 Location = new Point(245, 430),
@@ -588,8 +630,8 @@ namespace WindowsFormsApp1
 
             enterDiagnosis = new Label()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
-                ForeColor = Color.Black,
+                Font = new Font("Century", 14, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#138fff"),
                 BackColor = Color.Transparent,
                 Size = new Size(175, 50),
                 TextAlign = ContentAlignment.TopRight,
@@ -599,7 +641,7 @@ namespace WindowsFormsApp1
 
             otvet_diagnosis = new Label()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
+                Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.Transparent,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
                 Location = new Point(645, 150),
@@ -609,7 +651,7 @@ namespace WindowsFormsApp1
 
             enterTextDiagnosis = new TextBox()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
+                Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.White,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
                 Location = new Point(645, 150),
@@ -619,8 +661,8 @@ namespace WindowsFormsApp1
 
             enterStatus = new Label()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
-                ForeColor = Color.Black,
+                Font = new Font("Century", 14, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#138fff"),
                 BackColor = Color.Transparent,
                 Size = new Size(175, 50),
                 TextAlign = ContentAlignment.TopRight,
@@ -630,7 +672,7 @@ namespace WindowsFormsApp1
 
             enterTextStatus = new TextBox()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
+                Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.White,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
                 Location = new Point(645, 220),
@@ -640,7 +682,7 @@ namespace WindowsFormsApp1
 
             otvet_status = new Label()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
+                Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.Transparent,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
                 Location = new Point(645, 220),
@@ -650,8 +692,8 @@ namespace WindowsFormsApp1
 
             enterDoctor = new Label()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
-                ForeColor = Color.Black,
+                Font = new Font("Century", 14, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#138fff"),
                 BackColor = Color.Transparent,
                 Size = new Size(175, 50),
                 TextAlign = ContentAlignment.TopRight,
@@ -661,7 +703,7 @@ namespace WindowsFormsApp1
 
             enterTextDoctor = new TextBox()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
+                Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.White,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
                 Location = new Point(645, 290),
@@ -671,7 +713,7 @@ namespace WindowsFormsApp1
 
             otvet_doctor = new Label()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
+                Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.Transparent,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
                 Location = new Point(645, 290),
@@ -681,8 +723,8 @@ namespace WindowsFormsApp1
 
             enterDepartment = new Label()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
-                ForeColor = Color.Black,
+                Font = new Font("Century", 14, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#138fff"),
                 BackColor = Color.Transparent,
                 Size = new Size(175, 50),
                 TextAlign = ContentAlignment.TopRight,
@@ -692,7 +734,7 @@ namespace WindowsFormsApp1
 
             enterTextDepartment = new TextBox()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
+                Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.White,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
                 Location = new Point(645, 360),
@@ -702,7 +744,7 @@ namespace WindowsFormsApp1
 
             otvet_department = new Label()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
+                Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.Transparent,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
                 Location = new Point(645, 360),
@@ -712,8 +754,8 @@ namespace WindowsFormsApp1
 
             enterDays = new Label()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
-                ForeColor = Color.Black,
+                Font = new Font("Century", 14, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#138fff"),
                 BackColor = Color.Transparent,
                 Size = new Size(175, 50),
                 TextAlign = ContentAlignment.TopRight,
@@ -723,7 +765,7 @@ namespace WindowsFormsApp1
 
             enterTextDays = new TextBox()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
+                Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.White,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
                 Location = new Point(645, 430),
@@ -733,7 +775,7 @@ namespace WindowsFormsApp1
 
             otvet_days = new Label()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
+                Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.Transparent,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
                 Location = new Point(645, 430),
@@ -744,19 +786,27 @@ namespace WindowsFormsApp1
             sendPatientInfo = new Button()
             {
                 Text = "Отправить",
-                Font = new Font("Castellar", 24, FontStyle.Bold),
-                ForeColor = HexToColor.HexStringToColor("#ad7400"),
-                BackColor = HexToColor.HexStringToColor("#fffa61"),
+                Font = new Font("Century", 20, FontStyle.Bold),
+                ForeColor = Color.White,
                 Location = new Point(700, 500),
                 Size = new Size(200, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
+            try
+            {
+                sendPatientInfo.BackgroundImage = Image.FromFile("..\\..\\..\\..\\client with interface\\WindowsFormsApp1\\button.png"); // Путь к изображению
+                sendPatientInfo.BackgroundImageLayout = ImageLayout.Stretch; // Растянуть изображение по кнопке
+            }
+            catch (Exception ex)
+            {
+                sendPatientInfo.BackColor = HexToColor.HexStringToColor("#fffa61");
+            }
             this.sendPatientInfo.Click += SendPatient;
 
             patientNumber = new Label()
             {
-                Font = new Font("Castellar", 14, FontStyle.Bold),
-                ForeColor = Color.Black,
+                Font = new Font("Century", 14, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#138fff"),
                 BackColor = Color.Transparent,
                 Size = new Size(175, 50),
                 TextAlign = ContentAlignment.TopRight,
@@ -766,7 +816,7 @@ namespace WindowsFormsApp1
 
             errorEnterPatient = new Label()
             {
-                Font = new Font("Castellar", 16, FontStyle.Bold),
+                Font = new Font("Century", 16, FontStyle.Bold),
                 Text = "",
                 ForeColor = Color.Red,
                 BackColor = Color.Transparent,
@@ -789,21 +839,29 @@ namespace WindowsFormsApp1
             searchPatient = new Button()
             {
                 Text = "Поиск пациента",
-                Font = new Font("Castellar", 18, FontStyle.Bold),
-                ForeColor = HexToColor.HexStringToColor("#7a0696"),
-                BackColor = HexToColor.HexStringToColor("#e6a9f5"),
+                Font = new Font("Century", 18, FontStyle.Bold),
+                ForeColor = Color.White,
                 Location = new Point(350, 200),
                 Size = new Size(275, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
+            try
+            {
+                searchPatient.BackgroundImage = Image.FromFile("..\\..\\..\\..\\client with interface\\WindowsFormsApp1\\button.png"); // Путь к изображению
+                searchPatient.BackgroundImageLayout = ImageLayout.Stretch; // Растянуть изображение по кнопке
+            }
+            catch (Exception ex)
+            {
+                searchPatient.BackColor = HexToColor.HexStringToColor("#e6a9f5");
+            }
             searchPatient.Click += search;
 
             label_fio = new Label()
             {
                 Text = "Введите фамилию пациента:",
-                Font = new Font("Castellar", 18, FontStyle.Bold),
-                ForeColor = HexToColor.HexStringToColor("#7a0696"),
-                BackColor = HexToColor.HexStringToColor("#e6a9f5"),
+                Font = new Font("Century", 18, FontStyle.Bold),
+                ForeColor = Color.White,
+                BackColor = Color.Transparent,
                 Location = new Point(350, 200),
                 Size = new Size(275, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
@@ -811,7 +869,7 @@ namespace WindowsFormsApp1
 
             textbox_fio = new TextBox()
             {
-                Font = new Font("Castellar", 18, FontStyle.Bold),
+                Font = new Font("Century", 18, FontStyle.Bold),
                 ForeColor = Color.White,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
                 Location = new Point(350, 350),
@@ -822,9 +880,9 @@ namespace WindowsFormsApp1
             label_id = new Label()
             {
                 Text = "ID пациента:",
-                Font = new Font("Castellar", 18, FontStyle.Bold),
-                ForeColor = HexToColor.HexStringToColor("#FFFFFF"),
-                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Font = new Font("Century", 18, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#138fff"),
+                BackColor = Color.Transparent,
                 Location = new Point(150, 230),
                 Size = new Size(275, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
@@ -833,9 +891,9 @@ namespace WindowsFormsApp1
             label_name = new Label()
             {
                 Text = "Имя пациента:",
-                Font = new Font("Castellar", 18, FontStyle.Bold),
-                ForeColor = HexToColor.HexStringToColor("#FFFFFF"),
-                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Font = new Font("Century", 18, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#138fff"),
+                BackColor = Color.Transparent,
                 Location = new Point(150, 290),
                 Size = new Size(275, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
@@ -844,9 +902,9 @@ namespace WindowsFormsApp1
             label_no_patient = new Label()
             {
                 Text = "Пациента с данной фамилией не найдено",
-                Font = new Font("Castellar", 18, FontStyle.Bold),
-                ForeColor = HexToColor.HexStringToColor("#7a0696"),
-                BackColor = HexToColor.HexStringToColor("#e6a9f5"),
+                Font = new Font("Century", 18, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#138fff"),
+                BackColor = Color.Transparent,
                 Location = new Point(290, 200),
                 Size = new Size(400, 100),
                 TextAlign = ContentAlignment.MiddleCenter,
@@ -856,7 +914,7 @@ namespace WindowsFormsApp1
             label_fio_2 = new Label()
             {
                 Text = "Фамилия пациента:",
-                Font = new Font("Castellar", 18, FontStyle.Bold),
+                Font = new Font("Century", 18, FontStyle.Bold),
                 ForeColor = HexToColor.HexStringToColor("#FFFFFF"),
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
                 Location = new Point(150, 350),
@@ -867,9 +925,9 @@ namespace WindowsFormsApp1
             label_id_otvet = new Label()
             {
                 Text = "Здесь данные пациента",
-                Font = new Font("Castellar", 18, FontStyle.Bold),
-                ForeColor = HexToColor.HexStringToColor("#FFFFFF"),
-                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Font = new Font("Century", 18, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#138fff"),
+                BackColor = Color.Transparent,
                 Location = new Point(500, 230),
                 Size = new Size(275, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
@@ -878,9 +936,9 @@ namespace WindowsFormsApp1
             label_name_otvet = new Label()
             {
                 Text = "Здесь данные пациента",
-                Font = new Font("Castellar", 18, FontStyle.Bold),
-                ForeColor = HexToColor.HexStringToColor("#FFFFFF"),
-                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Font = new Font("Century", 18, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#138fff"),
+                BackColor = Color.Transparent,
                 Location = new Point(500, 290),
                 Size = new Size(275, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
@@ -889,9 +947,9 @@ namespace WindowsFormsApp1
             label_fio_2_otvet = new Label()
             {
                 Text = "Здесь данные пациента",
-                Font = new Font("Castellar", 18, FontStyle.Bold),
-                ForeColor = HexToColor.HexStringToColor("#FFFFFF"),
-                BackColor = HexToColor.HexStringToColor("#2e2e2e"),
+                Font = new Font("Century", 18, FontStyle.Bold),
+                ForeColor = HexToColor.HexStringToColor("#138fff"),
+                BackColor = Color.Transparent,
                 Location = new Point(500, 350),
                 Size = new Size(275, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
@@ -900,52 +958,84 @@ namespace WindowsFormsApp1
             send = new Button()
             {
                 Text = "Отправить",
-                Font = new Font("Castellar", 18, FontStyle.Bold),
-                ForeColor = HexToColor.HexStringToColor("#7a0696"),
-                BackColor = HexToColor.HexStringToColor("#e6a9f5"),
+                Font = new Font("Century", 18, FontStyle.Bold),
+                ForeColor = Color.White,
                 Location = new Point(385, 450),
                 Size = new Size(200, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
+            try
+            {
+                send.BackgroundImage = Image.FromFile("..\\..\\..\\..\\client with interface\\WindowsFormsApp1\\button.png"); // Путь к изображению
+                send.BackgroundImageLayout = ImageLayout.Stretch; // Растянуть изображение по кнопке
+            }
+            catch (Exception ex)
+            {
+                send.BackColor = HexToColor.HexStringToColor("#e6a9f5");
+            }
             send.Click += send_func;
 
             // кнопка "Добавить пациента"
             addPatient = new Button()
             {
                 Text = "Добавить пациента",
-                Font = new Font("Castellar", 18, FontStyle.Bold),
-                ForeColor = HexToColor.HexStringToColor("#009118"),
-                BackColor = HexToColor.HexStringToColor("#8aff9d"),
+                Font = new Font("Century", 18, FontStyle.Bold),
+                ForeColor = Color.White,
                 Location = new Point(650, 200),
                 Size = new Size(275, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
+            try
+            {
+                addPatient.BackgroundImage = Image.FromFile("..\\..\\..\\..\\client with interface\\WindowsFormsApp1\\button.png"); // Путь к изображению
+                addPatient.BackgroundImageLayout = ImageLayout.Stretch; // Растянуть изображение по кнопке
+            }
+            catch (Exception ex)
+            {
+                addPatient.BackColor = HexToColor.HexStringToColor("#8aff9d");
+            }
             addPatient.Click += add;
 
             // кнопка "Удалить пациента"
             deletePatient = new Button()
             {
                 Text = "Удалить пациента",
-                Font = new Font("Castellar", 18, FontStyle.Bold),
-                ForeColor = HexToColor.HexStringToColor("#945113"),
-                BackColor = HexToColor.HexStringToColor("#edb47e"),
+                Font = new Font("Century", 18, FontStyle.Bold),
+                ForeColor = Color.White,
                 Location = new Point(185, 275),
                 Size = new Size(275, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
+            try
+            {
+                deletePatient.BackgroundImage = Image.FromFile("..\\..\\..\\..\\client with interface\\WindowsFormsApp1\\button.png"); // Путь к изображению
+                deletePatient.BackgroundImageLayout = ImageLayout.Stretch; // Растянуть изображение по кнопке
+            }
+            catch (Exception ex)
+            {
+                deletePatient.BackColor = HexToColor.HexStringToColor("#edb47e");
+            }
             deletePatient.Click += delete;
 
             //кнопка Отправить
             send_delete = new Button()
             {
                 Text = "Отправить",
-                Font = new Font("Castellar", 18, FontStyle.Bold),
-                ForeColor = HexToColor.HexStringToColor("#7a0696"),
-                BackColor = HexToColor.HexStringToColor("#e6a9f5"),
+                Font = new Font("Century", 18, FontStyle.Bold),
+                ForeColor = Color.White,
                 Location = new Point(385, 450),
                 Size = new Size(200, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
+            try
+            {
+                send_delete.BackgroundImage = Image.FromFile("..\\..\\..\\..\\client with interface\\WindowsFormsApp1\\button.png"); // Путь к изображению
+                send_delete.BackgroundImageLayout = ImageLayout.Stretch; // Растянуть изображение по кнопке
+            }
+            catch (Exception ex)
+            {
+                send_delete.BackColor = HexToColor.HexStringToColor("#e6a9f5");
+            }
             send_delete.Click += sendDelete;
 
 
@@ -953,19 +1043,27 @@ namespace WindowsFormsApp1
             printPatients = new Button()
             {
                 Text = "Показать список пациентов",
-                Font = new Font("Castellar", 14, FontStyle.Bold),
-                ForeColor = HexToColor.HexStringToColor("#0752a8"),
-                BackColor = HexToColor.HexStringToColor("#8bb3e0"),
+                Font = new Font("Century", 12, FontStyle.Bold),
+                ForeColor = Color.White,
                 Location = new Point(485, 275),
                 Size = new Size(275, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
+            try
+            {
+                printPatients.BackgroundImage = Image.FromFile("..\\..\\..\\..\\client with interface\\WindowsFormsApp1\\button.png"); // Путь к изображению
+                printPatients.BackgroundImageLayout = ImageLayout.Stretch; // Растянуть изображение по кнопке
+            }
+            catch (Exception ex)
+            {
+                printPatients.BackColor = HexToColor.HexStringToColor("#8bb3e0");
+            }
             printPatients.Click += print;
 
             // Фоновое изображение
             try
             {
-                this.BackgroundImage = Image.FromFile("C:/Users/Ivan/source/repos/WindowsFormsApp1/WindowsFormsApp1/picure.png"); // Путь к изображению
+                this.BackgroundImage = Image.FromFile("..\\..\\..\\..\\client with interface\\WindowsFormsApp1\\background.jpg"); // Путь к изображению
                 this.BackgroundImageLayout = ImageLayout.Stretch; // Растягиваем изображение по форме
             }
             catch (Exception ex)
