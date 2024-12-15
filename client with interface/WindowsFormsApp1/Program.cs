@@ -1220,6 +1220,8 @@ namespace WindowsFormsApp1
 
         private void print(object sender, EventArgs e)
         {
+            spisok.Items.Clear();
+
             this.Controls.Remove(createPatientList); // Удаляем кнопку "Создать список пациентов"
             this.Controls.Remove(searchPatient); // Удаляем кнопку "Поиск пациента"
             this.Controls.Remove(addPatient); // Удаляем кнопку "Добавить пациента"
@@ -1230,18 +1232,53 @@ namespace WindowsFormsApp1
             this.Controls.Add(spisok);
             this.Controls.Add(universalBack);
 
-            //string str_full_path = Application.ExecutablePath;
-            string str_path = "..\\..\\..\\..\\Hospital Proj\\patients.txt";
-            //string str_path = str_full_path + "\\patients.txt";
-            if (!File.Exists(str_path))
-            {
-                spisok.Items.Add("Файл patients.txt не прочитался или не найден!!!");
-                return;
-            }
-            
-            string[] str = File.ReadAllLines(str_path);
-            spisok.Items.AddRange(str);
+            byte[] data = Encoding.ASCII.GetBytes("5");
+            stream.Write(data, 0, data.Length);
 
+            byte[] bytes = new byte[256];
+            int bytesRead = stream.Read(bytes, 0, bytes.Length);
+            string responseData = Encoding.UTF8.GetString(bytes, 0, bytesRead);
+            responseData = Encoding.UTF8.GetString(bytes, 0, bytesRead);
+            int c = Convert.ToInt32(responseData);
+
+            if (c == 0)
+            {
+                spisok.Items.Add("Список пациентов пустой");
+            }
+            else
+            {
+                for(int i = 0; i < c; i++)
+                {
+                    bytesRead = stream.Read(bytes, 0, bytes.Length);
+                    responseData = Encoding.UTF8.GetString(bytes, 0, bytesRead);
+                    string[] pat = split(responseData);
+
+                    string pat_n = "Пациент номер " + Convert.ToString(i + 1);
+                    string id = "ID = " + pat[0];
+                    string name = "Имя = " + pat[1];
+                    string surname = "Фамилия = " + pat[2];
+                    string gender = "Пол = " + pat[3];
+                    string age = "Возраст = " + pat[4];
+                    string diagnosis = "Диагноз = " + pat[5];
+                    string status = "Статус = " + pat[6];
+                    string doctor = "Доктор = " + pat[7];
+                    string department = "Отделение = " + pat[8];
+                    string days = "Оставшиеся дни = " + pat[9];
+
+                    spisok.Items.Add(pat_n);
+                    spisok.Items.Add(id);
+                    spisok.Items.Add(name);
+                    spisok.Items.Add(surname);
+                    spisok.Items.Add(gender);
+                    spisok.Items.Add(age);
+                    spisok.Items.Add(diagnosis);
+                    spisok.Items.Add(status);
+                    spisok.Items.Add(doctor);
+                    spisok.Items.Add(department);
+                    spisok.Items.Add(days);
+                    spisok.Items.Add("-----------------------------");
+                }
+            }
         }
 
         private void SendPatient(object sender, EventArgs e)
