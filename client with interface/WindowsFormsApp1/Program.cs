@@ -301,6 +301,7 @@ namespace WindowsFormsApp1
                 Size = new Size(200, 50),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
+            senddaysButton.Click += daySend;
 
             //ползунок
             numberTrackBar = new TrackBar()
@@ -1578,6 +1579,23 @@ namespace WindowsFormsApp1
 
             byte[] data = Encoding.ASCII.GetBytes("BACK");
             stream.Write(data, 0, data.Length);
+        }
+
+        private void daySend(object sender, EventArgs e)
+        {
+            byte[] data = Encoding.ASCII.GetBytes(Convert.ToString(this.numberTrackBar.Value));
+            stream.Write(data, 0, data.Length);
+
+            this.Controls.Add(exitButton);
+            this.Controls.Add(patientActions);
+            this.Controls.Add(timeActions);
+
+            this.Controls.Remove(daysexitButton);
+            this.Controls.Remove(senddaysButton);
+            this.Controls.Remove(valueLabel);
+            this.Controls.Remove(numberTrackBar);
+            this.Controls.Remove(countofdays);
+
         }
 
         private string[] split(string input)
