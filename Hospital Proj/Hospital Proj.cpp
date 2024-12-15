@@ -321,6 +321,7 @@ int main() {
 							moment = false;
 							break;
 						}
+						break;
 					}
 
 					std::string number_st = receiveMessage(client_socket);
