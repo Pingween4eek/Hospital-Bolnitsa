@@ -439,6 +439,7 @@ namespace WindowsFormsApp1
 
             createtextbox1 = new TextBox()
             {
+                Name = "createtextbox1",
                 Font = new Font("Century", 18, FontStyle.Bold),
                 ForeColor = Color.White,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
@@ -486,6 +487,7 @@ namespace WindowsFormsApp1
 
             enterTextId = new TextBox()
             {
+                Name = "Id",
                 Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.White,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
@@ -517,6 +519,7 @@ namespace WindowsFormsApp1
 
             enterTextName = new TextBox()
             {
+                Name = "Name",
                 Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.White,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
@@ -548,6 +551,7 @@ namespace WindowsFormsApp1
 
             enterTextSurname = new TextBox()
             {
+                Name = "Surname",
                 Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.White,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
@@ -579,6 +583,7 @@ namespace WindowsFormsApp1
 
             enterTextGender = new TextBox()
             {
+                Name = "Gender",
                 Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.White,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
@@ -610,6 +615,7 @@ namespace WindowsFormsApp1
 
             enterTextAge = new TextBox()
             {
+                Name = "Age",
                 Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.White,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
@@ -651,6 +657,7 @@ namespace WindowsFormsApp1
 
             enterTextDiagnosis = new TextBox()
             {
+                Name = "Diagnosis",
                 Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.White,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
@@ -672,6 +679,7 @@ namespace WindowsFormsApp1
 
             enterTextStatus = new TextBox()
             {
+                Name = "Status",
                 Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.White,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
@@ -703,6 +711,7 @@ namespace WindowsFormsApp1
 
             enterTextDoctor = new TextBox()
             {
+                Name = "Doctor",
                 Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.White,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
@@ -734,6 +743,7 @@ namespace WindowsFormsApp1
 
             enterTextDepartment = new TextBox()
             {
+                Name = "Department",
                 Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.White,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),
@@ -765,6 +775,7 @@ namespace WindowsFormsApp1
 
             enterTextDays = new TextBox()
             {
+                Name = "Days",
                 Font = new Font("Century", 14, FontStyle.Bold),
                 ForeColor = Color.White,
                 BackColor = HexToColor.HexStringToColor("#2e2e2e"),

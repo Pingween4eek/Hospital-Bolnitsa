@@ -27,3 +27,13 @@ C:\Users\pc\Desktop\Hospital-Bolnitsa-main\client with interface\WindowsFormsApp
 C:\Users\pc\Desktop\Hospital-Bolnitsa-main\client with interface\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
 C:\Users\pc\Desktop\Hospital-Bolnitsa-main\client with interface\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 C:\Users\pc\Desktop\Hospital-Bolnitsa-main\client with interface\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+C:\Users\kolga\Desktop\Hospital-Bolnitsa-main\client with interface\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+C:\Users\kolga\Desktop\Hospital-Bolnitsa-main\client with interface\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+C:\Users\kolga\Desktop\Hospital-Bolnitsa-main\client with interface\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+C:\Users\kolga\Desktop\Hospital-Bolnitsa-main\client with interface\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.AssemblyReference.cache
+C:\Users\kolga\Desktop\Hospital-Bolnitsa-main\client with interface\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
+C:\Users\kolga\Desktop\Hospital-Bolnitsa-main\client with interface\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+C:\Users\kolga\Desktop\Hospital-Bolnitsa-main\client with interface\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
+C:\Users\kolga\Desktop\Hospital-Bolnitsa-main\client with interface\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
+C:\Users\kolga\Desktop\Hospital-Bolnitsa-main\client with interface\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+C:\Users\kolga\Desktop\Hospital-Bolnitsa-main\client with interface\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
